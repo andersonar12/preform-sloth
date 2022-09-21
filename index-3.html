@@ -14,15 +14,29 @@
                 <div>
                     <input class="sm-preform__input sm-preform__postcodeFrom sm-preform-input-postcode-width"
                         type="text" placeholder="Moving from" name="smfPostCodeFrom" required />
-                    <p class="error postcodeFrom-error"></p>
+                    <!-- <p class="error postcodeFrom-error"></p> -->
                 </div>
                 <div>
                     <input class="sm-preform__input sm-preform__postcodeTo sm-preform-input-postcode-width"
                         id="sm-preform__postCodeTo" type="text" name="smfPostCode" placeholder="Moving to"
                         style="margin-left: 25px;" required />
-                    <p class="error postcodeTo-error"></p>
+                    <!-- <p class="error postcodeTo-error"></p> -->
                 </div>
             </div>
+            <!-- Postcodes when entry address manual -->
+            <div class="sm-preform-left-inputs postcode-inputs">
+                <div>
+                    <input class="sm-preform__input sm-preform-input-postcode-width" id="input-postCodeFrom" type="text"
+                        placeholder="Old Postcode" name="smfPostCodeFrom" />
+                    <p class="error postcodeFrom-error"></p>
+                </div>
+                <div>
+                    <input class="sm-preform__input sm-preform-input-postcode-width" id="input-postCodeTo" type="text"
+                        name="smfPostCode" placeholder="New Postcode" style="margin-left: 25px;" />
+                    <p class="error postcodeTo-error" style="margin-left: 25px;"></p>
+                </div>
+            </div>
+            <!-- Postcodes when entry address manual -->
             <div class="sm-preform-address-set">
                 <div class="addressesFromSet" id="addressesFromSet">
                 </div>
@@ -80,14 +94,14 @@
         </div>
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeFrom__mobile sm-preform-mobile-email-input-width"
-                type="text" placeholder="Moving from" name="smfPostCodeFrom" required/>
+                type="text" placeholder="Moving from" name="smfPostCodeFrom" required />
             <p class="error postcodeFrom-error-mobile"></p>
         </div>
         <div class="addressesFromSet-mobile" id="addressesFromSet-mobile">
         </div>
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeTo__mobile sm-preform-mobile-email-input-width"
-                type="text" name="smfPostCode" placeholder="Moving to" required/>
+                type="text" name="smfPostCode" placeholder="Moving to" required />
             <p class="error postcodeTo-error-mobile"></p>
         </div>
         <div class="addressesToSet-mobile" id="addressesToSet-mobile">
@@ -194,7 +208,7 @@
                 showFromAddress = false;
             }
 
-            if (value.length >= 2 ) {
+            if (value.length >= 2) {
 
                 if (value != "") {
 
@@ -234,6 +248,55 @@
             new_addressFrom = value;
         }
     });
+
+    //Inputs Postcodes Manuals
+    const inputsPostcodesManuals = () => {
+        const errorInputs = (className) => {
+            document.querySelector(className).style.display = "block"
+            document.querySelector(className).innerHTML = "Enter a valid postcode"
+        }
+
+        const clearErrors = (className) => {
+            document.querySelector(className).style.display = "none"
+        }
+
+        /* tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. */
+        function isValidPostcode(p) {
+            var postcodeRegEx = /^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}$/i;
+            
+            return postcodeRegEx.test(p);
+        }
+
+        document.querySelector("#input-postCodeFrom").addEventListener("input", (e) => {
+            e.preventDefault();
+            let value = e.target.value;
+
+            console.log(isValidPostcode(value))
+            if (value == "" || !isValidPostcode(value)) {
+                errorInputs('.postcodeFrom-error')
+                postcodeFrom = ""
+            } else {
+                clearErrors('.postcodeFrom-error')
+                postcodeFrom = value
+            }
+        })
+
+        document.querySelector("#input-postCodeTo").addEventListener("input", (e) => {
+            e.preventDefault();
+            let value = e.target.value;
+
+            console.log(isValidPostcode(value))
+            if (value == "" || !isValidPostcode(value)) {
+                errorInputs('.postcodeTo-error')
+                postcodeTo = ""
+            } else {
+                clearErrors('.postcodeTo-error')
+                postcodeTo = value
+            }
+        })
+    }
+    inputsPostcodesManuals()
+    //Inputs Postcodes Manuals
     function addressesFromItemClick(value) {
         document.querySelector(".addressesFromSet").style.display = "none";
 
@@ -269,8 +332,8 @@
                 showToAddress = false;
             }
 
-            if (value.length >= 2 ) {
-                
+            if (value.length >= 2) {
+
                 if (value != "") {
                     fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
                         method: "GET",
@@ -330,7 +393,7 @@
     document.querySelector(".desktop-view").addEventListener("submit", function (e) {
         e.preventDefault();
 
-        if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '') {
+        if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
             var smfEmail = document.querySelector('input[name="smfEmail"]').value;
             var re = new RegExp(/^.*\//);
             document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
@@ -360,9 +423,9 @@
 
             const objEncode64 = window.btoa(JSON.stringify(obj));
 
-            if (completeAddressFrom && completeAddressTo){
-             console.log(obj)
-             location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
+            if (completeAddressFrom && completeAddressTo) {
+                console.log(obj)
+                location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
             }
 
             /* var re = new RegExp(/^.*\//); */
@@ -384,6 +447,11 @@
         enterAddressManuallyMobileButtonClick();
         document.querySelector(".sm-preform-enter-address-manually-button").style.display = "none";
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "block";
+        // Input Postcodes
+        document.querySelector('.postcode-inputs').style.display = "flex"
+        document.getElementById('input-postCodeFrom').setAttribute("required",'')
+        document.getElementById('input-postCodeTo').setAttribute("required",'')
+        // Input Postcodes
         document.querySelector(".addressesFromSet").style.display = "none";
         document.querySelector(".addressesToSet").style.display = "none";
         document.querySelector(".postcodeTo-error").style.display = "none";
@@ -397,12 +465,20 @@
         useAddressFinderMobileButtonClick();
         document.querySelector(".sm-preform-enter-address-manually-button").style.display = "block";
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "none";
+        //Input Postcodes
+        document.querySelector('.postcode-inputs').style.display = "none"
+        document.getElementById('input-postCodeFrom').removeAttribute("required")
+        document.getElementById('input-postCodeTo').removeAttribute("required")
+        //Input Postcodes
         document.querySelector(".postcodeFrom-error").style.display = "block";
         document.querySelector(".postcodeTo-error").style.display = "block";
         document.querySelector(".sm-preform__postcodeFrom").value = new_addressFrom;
         document.querySelector(".sm-preform__postcodeTo").value = new_addressTo;
         manual_addressFrom = false;
         manual_addressTo = false;
+
+        document.querySelector("#input-postCodeFrom").value = ""
+        document.querySelector("#input-postCodeTo").value = ""
     }
 
     window.onload = init;
@@ -431,7 +507,7 @@
                 showFromAddress = false;
             }
             if (value.length >= 2) {
-                
+
                 if (value != "") {
 
                     fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
@@ -529,7 +605,7 @@
                             });
                             x.innerHTML = str;
                         })
-                    } else {
+                } else {
                     document.querySelector(".postcodeTo-error-mobile").innerHTML = "";
                 }
             }
@@ -593,9 +669,9 @@
 
             const objEncode64 = window.btoa(JSON.stringify(obj));
 
-            if (completeAddressFrom && completeAddressTo){
-             console.log(obj)
-             location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
+            if (completeAddressFrom && completeAddressTo) {
+                console.log(obj)
+                location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
             }
 
             /*var re = new RegExp(/^.*\//);
@@ -744,7 +820,7 @@
         margin: 0 auto;
         display: flex;
         justify-content: center;
-        font-family: "Montserrat",sans-serif !important;
+        font-family: "Montserrat", sans-serif !important;
         min-height: 350px;
         background: #fff;
         width: 940px;
@@ -1188,5 +1264,9 @@
         display: none;
         text-decoration: underline;
         cursor: pointer;
+    }
+
+    .postcode-inputs {
+        display: none;
     }
 </style>
