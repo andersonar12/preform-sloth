@@ -26,12 +26,12 @@
             <!-- Postcodes when entry address manual -->
             <div class="sm-preform-left-inputs postcode-inputs">
                 <div>
-                    <input class="sm-preform__input sm-preform-input-postcode-width" id="input-postCodeFrom" type="text"
+                    <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom" type="text"
                         placeholder="Old Postcode" name="smfPostCodeFrom" />
                     <p class="error postcodeFrom-error"></p>
                 </div>
                 <div>
-                    <input class="sm-preform__input sm-preform-input-postcode-width" id="input-postCodeTo" type="text"
+                    <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo" type="text"
                         name="smfPostCode" placeholder="New Postcode" style="margin-left: 25px;" />
                     <p class="error postcodeTo-error" style="margin-left: 25px;"></p>
                 </div>
@@ -72,8 +72,9 @@
             </div>
         </div>
         <div class="sm-preform-right">
-            <video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
-                style="height: 360px;  object-fit: contain;" autoplay muted loop></video>
+            <<!-- video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
+                style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
+                <img style="height: 360px;  object-fit: contain;" src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1" width="360" height="360">
         </div>
     </div>
 </form>
@@ -82,8 +83,9 @@
         <div class="sm-preform-mobile-logo">
             <!-- <video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
                 style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
-            <img src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/banner-preform.png"
-                style="height: 280px; width: 90%; object-fit: contain;"></img>
+            <!-- <img src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/banner-preform.png"
+                style="height: 280px; width: 90%; object-fit: contain;"></img> -->
+                <img style="height: 360px;  object-fit: contain;" src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1" width="360" height="360">
         </div>
         <div class="sm-preform-mobile-title">Update your address with <span style="font-weight: bold;">hundreds</span>
             of businesses at once</div>
@@ -95,15 +97,29 @@
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeFrom__mobile sm-preform-mobile-email-input-width"
                 type="text" placeholder="Moving from" name="smfPostCodeFrom" required />
-            <p class="error postcodeFrom-error-mobile"></p>
+            <!-- <p class="error postcodeFrom-error-mobile"></p> -->
         </div>
         <div class="addressesFromSet-mobile" id="addressesFromSet-mobile">
         </div>
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeTo__mobile sm-preform-mobile-email-input-width"
                 type="text" name="smfPostCode" placeholder="Moving to" required />
-            <p class="error postcodeTo-error-mobile"></p>
+            <!-- <p class="error postcodeTo-error-mobile"></p> -->
         </div>
+        <!-- Inputs Postcodes -->
+        <div class="sm-preform-left-inputs postcode-inputs-mobile">
+            <div>
+                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom-mobile" type="text" style="width: 98%;"
+                    placeholder="Old Postcode" name="smfPostCodeFrom" />
+                <p class="error postcodeFrom-error-mobile"></p>
+            </div>
+            <div>
+                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo-mobile"  type="text"
+                    name="smfPostCode" placeholder="New Postcode" style="width: 98%; margin-top: 15px;" />
+                <p class="error postcodeTo-error-mobile" style="margin-top: 15px;"></p>
+            </div>
+        </div>
+        <!-- Inputs Postcodes -->
         <div class="addressesToSet-mobile" id="addressesToSet-mobile">
         </div>
         <div>
@@ -250,7 +266,7 @@
     });
 
     //Inputs Postcodes Manuals
-    const inputsPostcodesManuals = () => {
+    const inputsPostcodesManuals = (postCodeFrom, postcodeFromError,postCodeTo, postcodeToError) => {
         const errorInputs = (className) => {
             document.querySelector(className).style.display = "block"
             document.querySelector(className).innerHTML = "Enter a valid postcode"
@@ -267,35 +283,41 @@
             return postcodeRegEx.test(p);
         }
 
-        document.querySelector("#input-postCodeFrom").addEventListener("input", (e) => {
+        document.querySelector(postCodeFrom).addEventListener("input", (e) => {
             e.preventDefault();
             let value = e.target.value;
 
             console.log(isValidPostcode(value))
             if (value == "" || !isValidPostcode(value)) {
-                errorInputs('.postcodeFrom-error')
+                errorInputs(postcodeFromError)
                 postcodeFrom = ""
             } else {
-                clearErrors('.postcodeFrom-error')
+                clearErrors(postcodeFromError)
                 postcodeFrom = value
             }
         })
 
-        document.querySelector("#input-postCodeTo").addEventListener("input", (e) => {
+        document.querySelector(postCodeTo).addEventListener("input", (e) => {
             e.preventDefault();
             let value = e.target.value;
 
             console.log(isValidPostcode(value))
             if (value == "" || !isValidPostcode(value)) {
-                errorInputs('.postcodeTo-error')
+                errorInputs(postcodeToError)
                 postcodeTo = ""
             } else {
-                clearErrors('.postcodeTo-error')
+                clearErrors(postcodeToError)
                 postcodeTo = value
             }
         })
     }
-    inputsPostcodesManuals()
+    inputsPostcodesManuals(".input-postCodeFrom",'.postcodeFrom-error',".input-postCodeTo",'.postcodeTo-error')
+
+    //load validation in mobile view
+    if (window.innerWidth <= 1000) {
+        inputsPostcodesManuals(".input-postCodeFrom-mobile",'.postcodeFrom-error-mobile',".input-postCodeTo-mobile",'.postcodeTo-error-mobile')
+    }
+
     //Inputs Postcodes Manuals
     function addressesFromItemClick(value) {
         document.querySelector(".addressesFromSet").style.display = "none";
@@ -449,8 +471,8 @@
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "block";
         // Input Postcodes
         document.querySelector('.postcode-inputs').style.display = "flex"
-        document.getElementById('input-postCodeFrom').setAttribute("required",'')
-        document.getElementById('input-postCodeTo').setAttribute("required",'')
+        document.querySelector('.input-postCodeFrom').setAttribute("required",'')
+        document.querySelector('.input-postCodeTo').setAttribute("required",'')
         // Input Postcodes
         document.querySelector(".addressesFromSet").style.display = "none";
         document.querySelector(".addressesToSet").style.display = "none";
@@ -467,8 +489,8 @@
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "none";
         //Input Postcodes
         document.querySelector('.postcode-inputs').style.display = "none"
-        document.getElementById('input-postCodeFrom').removeAttribute("required")
-        document.getElementById('input-postCodeTo').removeAttribute("required")
+        document.querySelector('.input-postCodeFrom').removeAttribute("required")
+        document.querySelector('.input-postCodeTo').removeAttribute("required")
         //Input Postcodes
         document.querySelector(".postcodeFrom-error").style.display = "block";
         document.querySelector(".postcodeTo-error").style.display = "block";
@@ -611,7 +633,7 @@
             }
         }
         else {
-            addressesTo = value;
+            new_addressTo = value;
         }
     });
 
@@ -640,7 +662,8 @@
 
     document.querySelector(".mobile-view").addEventListener("submit", function (e) {
         e.preventDefault();
-        if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '') {
+        debugger
+        if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
             var smfEmail = document.querySelector('input[name="smfEmailMobile"]').value;
             var re = new RegExp(/^.*\//);
             document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
@@ -693,6 +716,11 @@
     function enterAddressManuallyMobileButtonClick() {
         document.querySelector(".sm-preform-enter-address-manually-button-mobile").style.display = "none";
         document.querySelector(".sm-preform-use-address-finder-button-mobile").style.display = "block";
+        // Input Postcodes
+        document.querySelector('.postcode-inputs-mobile').style.display = "block"
+        document.querySelector('.input-postCodeFrom-mobile').setAttribute("required",'')
+        document.querySelector('.input-postCodeTo-mobile').setAttribute("required",'')
+        // Input Postcodes
         document.querySelector(".addressesFromSet-mobile").style.display = "none";
         document.querySelector(".addressesToSet-mobile").style.display = "none";
         document.querySelector(".postcodeTo-error-mobile").style.display = "none";
@@ -712,6 +740,11 @@
     function useAddressFinderMobileButtonClick() {
         document.querySelector(".sm-preform-enter-address-manually-button-mobile").style.display = "block";
         document.querySelector(".sm-preform-use-address-finder-button-mobile").style.display = "none";
+        //Input Postcodes
+        document.querySelector('.postcode-inputs-mobile').style.display = "none"
+        document.querySelector('.input-postCodeFrom-mobile').removeAttribute("required")
+        document.querySelector('.input-postCodeTo-mobile').removeAttribute("required")
+        //Input Postcodes
         document.querySelector(".postcodeFrom-error-mobile").style.display = "block";
         document.querySelector(".postcodeTo-error-mobile").style.display = "block";
         document.querySelector(".sm-preform__postcodeFrom__mobile").value = new_addressFrom;
@@ -723,6 +756,9 @@
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "none";
         document.querySelector(".postcodeTo-error").style.display = "block";
         document.querySelector(".postcodeFrom-error").style.display = "block";
+
+        document.querySelector(".input-postCodeFrom-mobile").value = ""
+        document.querySelector(".input-postCodeTo-mobile").value = ""
     }
 </script>
 
@@ -1268,5 +1304,11 @@
 
     .postcode-inputs {
         display: none;
+    }
+
+    .postcode-inputs-mobile{
+        display: none; 
+        margin-left: 10px;
+         margin-top: 15px;
     }
 </style>
