@@ -13,12 +13,12 @@
             <div class="sm-preform-left-inputs">
                 <div>
                     <input class="sm-preform__input sm-preform__postcodeFrom sm-preform-input-postcode-width"
-                        type="text" placeholder="Moving from" name="smfPostCodeFrom" required />
+                        type="text" placeholder="Enter your previous postcode" name="smfPostCodeFrom" required />
                     <!-- <p class="error postcodeFrom-error"></p> -->
                 </div>
                 <div>
                     <input class="sm-preform__input sm-preform__postcodeTo sm-preform-input-postcode-width"
-                        id="sm-preform__postCodeTo" type="text" name="smfPostCode" placeholder="Moving to"
+                        id="sm-preform__postCodeTo" type="text" name="smfPostCode" placeholder="Enter your new postcode"
                         style="margin-left: 25px;" required />
                     <!-- <p class="error postcodeTo-error"></p> -->
                 </div>
@@ -74,7 +74,9 @@
         <div class="sm-preform-right">
             <<!-- video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
                 style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
-                <img style="height: 360px;  object-fit: contain;" src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1" width="360" height="360">
+                <img style="height: 360px;  object-fit: contain;"
+                    src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1"
+                    width="360" height="360">
         </div>
     </div>
 </form>
@@ -85,7 +87,9 @@
                 style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
             <!-- <img src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/banner-preform.png"
                 style="height: 280px; width: 90%; object-fit: contain;"></img> -->
-                <img style="height: 360px;  object-fit: contain;" src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1" width="360" height="360">
+            <img style="height: 360px;  object-fit: contain;"
+                src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1"
+                width="360" height="360">
         </div>
         <div class="sm-preform-mobile-title">Update your address with <span style="font-weight: bold;">hundreds</span>
             of businesses at once</div>
@@ -96,25 +100,25 @@
         </div>
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeFrom__mobile sm-preform-mobile-email-input-width"
-                type="text" placeholder="Moving from" name="smfPostCodeFrom" required />
+                type="text" placeholder="Enter your previous postcode" name="smfPostCodeFrom" required />
             <!-- <p class="error postcodeFrom-error-mobile"></p> -->
         </div>
         <div class="addressesFromSet-mobile" id="addressesFromSet-mobile">
         </div>
         <div class="sm-preform-mobile-input">
             <input class="sm-preform__input sm-preform__postcodeTo__mobile sm-preform-mobile-email-input-width"
-                type="text" name="smfPostCode" placeholder="Moving to" required />
+                type="text" name="smfPostCode" placeholder="Enter your new postcode" required />
             <!-- <p class="error postcodeTo-error-mobile"></p> -->
         </div>
         <!-- Inputs Postcodes -->
         <div class="sm-preform-left-inputs postcode-inputs-mobile">
             <div>
-                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom-mobile" type="text" style="width: 98%;"
-                    placeholder="Old Postcode" name="smfPostCodeFrom" />
+                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom-mobile" type="text"
+                    style="width: 98%;" placeholder="Old Postcode" name="smfPostCodeFrom" />
                 <p class="error postcodeFrom-error-mobile"></p>
             </div>
             <div>
-                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo-mobile"  type="text"
+                <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo-mobile" type="text"
                     name="smfPostCode" placeholder="New Postcode" style="width: 98%; margin-top: 15px;" />
                 <p class="error postcodeTo-error-mobile" style="margin-top: 15px;"></p>
             </div>
@@ -215,6 +219,7 @@
     document.querySelector(".sm-preform__postcodeFrom").addEventListener("input", function (e) {
         e.preventDefault();
         let value = e.target.value;
+
         if (manual_addressFrom == false) {
             document.querySelector(".addressesFromSet").style.display = "none";
             if (showFromAddress == true) {
@@ -224,20 +229,28 @@
                 showFromAddress = false;
             }
 
-            if (value.length >= 2) {
+            if (value.length >= 4) {
 
                 if (value != "") {
 
-                    fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
                         method: "GET",
                         mode: "cors",
-                        headers: { "Content-Type": "application/json", },
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
                     })
                         .then((res) => res.json())
                         .then((json) => {
-                            console.log(json)
+                            console.log(json);
+
                             address_loading = true;
-                            addressesFrom = json.suggestions.map(item => item).sort();
+                            postcodeFrom = json.postcode
+                            addressesFrom = json.addresses.map((item) => {
+                                item.postcode = json.postcode
+
+                                return item
+                            })
 
                             if (addressesFrom.length > 0) {
                                 document.querySelector(".addressesFromSet").style.display = "block";
@@ -248,10 +261,38 @@
                             var x = document.getElementById("addressesFromSet");
                             var str = ""
                             addressesFrom.forEach((adr) => {
-                                str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                                str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
                             });
                             x.innerHTML = str;
                         })
+                        .catch((e) => console.error(e));
+
+                    // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    //     method: "GET",
+                    //     mode: "cors",
+                    //     headers: { "Content-Type": "application/json", },
+                    // })
+                    //     .then((res) => res.json())
+                    //     .then((json) => {
+                    //         console.log(json)
+                    //         address_loading = true;
+                    //         addressesFrom = json.suggestions.map(item => item).sort();
+
+                    //         if (addressesFrom.length > 0) {
+                    //             document.querySelector(".addressesFromSet").style.display = "block";
+                    //         }
+                    //         else {
+                    //             document.querySelector(".addressesFromSet").style.display = "none";
+                    //         }
+                    //         var x = document.getElementById("addressesFromSet");
+                    //         var str = ""
+                    //         addressesFrom.forEach((adr) => {
+                    //             str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                    //         });
+                    //         x.innerHTML = str;
+                    //     })
+
+
 
 
                 } else {
@@ -266,7 +307,7 @@
     });
 
     //Inputs Postcodes Manuals
-    const inputsPostcodesManuals = (postCodeFrom, postcodeFromError,postCodeTo, postcodeToError) => {
+    const inputsPostcodesManuals = (postCodeFrom, postcodeFromError, postCodeTo, postcodeToError) => {
         const errorInputs = (className) => {
             document.querySelector(className).style.display = "block"
             document.querySelector(className).innerHTML = "Enter a valid postcode"
@@ -279,7 +320,7 @@
         /* tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. */
         function isValidPostcode(p) {
             var postcodeRegEx = /^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}$/i;
-            
+
             return postcodeRegEx.test(p);
         }
 
@@ -311,33 +352,34 @@
             }
         })
     }
-    inputsPostcodesManuals(".input-postCodeFrom",'.postcodeFrom-error',".input-postCodeTo",'.postcodeTo-error')
+    inputsPostcodesManuals(".input-postCodeFrom", '.postcodeFrom-error', ".input-postCodeTo", '.postcodeTo-error')
 
     //load validation in mobile view
     if (window.innerWidth <= 1000) {
-        inputsPostcodesManuals(".input-postCodeFrom-mobile",'.postcodeFrom-error-mobile',".input-postCodeTo-mobile",'.postcodeTo-error-mobile')
+        inputsPostcodesManuals(".input-postCodeFrom-mobile", '.postcodeFrom-error-mobile', ".input-postCodeTo-mobile", '.postcodeTo-error-mobile')
     }
 
     //Inputs Postcodes Manuals
     function addressesFromItemClick(value) {
         document.querySelector(".addressesFromSet").style.display = "none";
 
-        const id = addressesFrom.find(item => item.address == value).id
+        // const id = addressesFrom.find(item => item.address == value).id
 
-        fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json)
-                completeAddressFrom = json
-            })
+        // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+        //     method: "GET",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(json)
+        //         completeAddressFrom = json
+        //     })
 
         new_addressFrom = value
+        completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
         document.querySelector(".sm-preform__postcodeFrom").value = value;
         showFromAddress = true;
         inputFromAddressFlag = false;
@@ -354,19 +396,29 @@
                 showToAddress = false;
             }
 
-            if (value.length >= 2) {
+            if (value.length >= 4) {
 
                 if (value != "") {
-                    fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+
+                    fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
                         method: "GET",
                         mode: "cors",
-                        headers: { "Content-Type": "application/json", },
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
                     })
                         .then((res) => res.json())
                         .then((json) => {
-                            console.log(json)
+                            console.log(json);
+
                             address_loading = true;
-                            addressesTo = json.suggestions.map(item => item).sort();
+                            postcodeTo = json.postcode
+
+                            addressesTo = json.addresses.map((item) => {
+                                item.postcode = json.postcode
+
+                                return item
+                            })
 
                             if (addressesTo.length > 0) {
                                 document.querySelector(".addressesToSet").style.display = "block";
@@ -377,10 +429,36 @@
                             var x = document.getElementById("addressesToSet");
                             var str = ""
                             addressesTo.forEach((adr) => {
-                                str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                                str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
                             });
                             x.innerHTML = str;
                         })
+                        .catch((e) => console.error(e));
+
+                    // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    //     method: "GET",
+                    //     mode: "cors",
+                    //     headers: { "Content-Type": "application/json", },
+                    // })
+                    //     .then((res) => res.json())
+                    //     .then((json) => {
+                    //         console.log(json)
+                    //         address_loading = true;
+                    //         addressesTo = json.suggestions.map(item => item).sort();
+
+                    //         if (addressesTo.length > 0) {
+                    //             document.querySelector(".addressesToSet").style.display = "block";
+                    //         }
+                    //         else {
+                    //             document.querySelector(".addressesToSet").style.display = "none";
+                    //         }
+                    //         var x = document.getElementById("addressesToSet");
+                    //         var str = ""
+                    //         addressesTo.forEach((adr) => {
+                    //             str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                    //         });
+                    //         x.innerHTML = str;
+                    //     })
                 } else {
                     document.querySelector(".postcodeTo-error").innerHTML = "";
                 }
@@ -392,25 +470,29 @@
     });
     function addressesToItemClick(value) {
         document.querySelector(".addressesToSet").style.display = "none";
-        const id = addressesTo.find(item => item.address == value).id
+        // const id = addressesTo.find(item => item.address == value).id
 
-        fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json)
-                completeAddressTo = json
-            })
+        // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+        //     method: "GET",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(json)
+        //         completeAddressTo = json
+        //     })
         new_addressTo = value;
-        //var str = document.querySelector(".sm-preform__postcodeTo").value.substring(0, toAddressSt) + " , " + value;
+        new_addressFrom = value
+        completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
         document.querySelector(".sm-preform__postcodeTo").value = value;
         showToAddress = true;
         inputToAddressFlag = false;
+
+
+        //var str = document.querySelector(".sm-preform__postcodeTo").value.substring(0, toAddressSt) + " , " + value;
     }
     document.querySelector(".desktop-view").addEventListener("submit", function (e) {
         e.preventDefault();
@@ -471,8 +553,8 @@
         document.querySelector(".sm-preform-use-address-finder-button").style.display = "block";
         // Input Postcodes
         document.querySelector('.postcode-inputs').style.display = "flex"
-        document.querySelector('.input-postCodeFrom').setAttribute("required",'')
-        document.querySelector('.input-postCodeTo').setAttribute("required",'')
+        document.querySelector('.input-postCodeFrom').setAttribute("required", '')
+        document.querySelector('.input-postCodeTo').setAttribute("required", '')
         // Input Postcodes
         document.querySelector(".addressesFromSet").style.display = "none";
         document.querySelector(".addressesToSet").style.display = "none";
@@ -528,23 +610,32 @@
                 value = value1;
                 showFromAddress = false;
             }
-            if (value.length >= 2) {
+            if (value.length >= 4) {
 
                 if (value != "") {
 
-                    fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
                         method: "GET",
                         mode: "cors",
-                        headers: { "Content-Type": "application/json", },
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
                     })
                         .then((res) => res.json())
                         .then((json) => {
-                            console.log(json)
+                            console.log(json);
+
                             address_loading = true;
-                            addressesFrom = json.suggestions.map(item => item).sort();
+                            postcodeFrom = json.postcode
+
+                            addressesFrom = json.addresses.map((item) => {
+                                item.postcode = json.postcode
+
+                                return item
+                            })
 
                             if (addressesFrom.length > 0) {
-                                document.querySelector(".addressesFromSet-mobile").style.display = "block"
+                                document.querySelector(".addressesFromSet-mobile").style.display = "block";
                             }
                             else {
                                 document.querySelector(".addressesFromSet-mobile").style.display = "none";
@@ -552,10 +643,37 @@
                             var x = document.getElementById("addressesFromSet-mobile");
                             var str = ""
                             addressesFrom.forEach((adr) => {
-                                str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromMobileItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                                str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromMobileItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
                             });
                             x.innerHTML = str;
                         })
+                        .catch((e) => console.error(e));
+
+                    // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    //     method: "GET",
+                    //     mode: "cors",
+                    //     headers: { "Content-Type": "application/json", },
+                    // })
+                    //     .then((res) => res.json())
+                    //     .then((json) => {
+                    //         console.log(json)
+                    //         address_loading = true;
+                    //         addressesFrom = json.suggestions.map(item => item).sort();
+
+                    //         if (addressesFrom.length > 0) {
+                    //             document.querySelector(".addressesFromSet-mobile").style.display = "block"
+                    //         }
+                    //         else {
+                    //             document.querySelector(".addressesFromSet-mobile").style.display = "none";
+                    //         }
+                    //         var x = document.getElementById("addressesFromSet-mobile");
+                    //         var str = ""
+                    //         addressesFrom.forEach((adr) => {
+                    //             str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromMobileItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                    //         });
+                    //         x.innerHTML = str;
+                    //     })
+
                 } else {
                     document.querySelector(".postcodeFrom-error-mobile").innerHTML = "";
                 }
@@ -567,23 +685,25 @@
     });
     function addressesFromMobileItemClick(value) {
         document.querySelector(".addressesFromSet-mobile").style.display = "none";
-        const id = addressesFrom.find(item => item.address == value).id
+        // const id = addressesFrom.find(item => item.address == value).id
 
-        fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json)
-                completeAddressFrom = json
-            })
+        // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+        //     method: "GET",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(json)
+        //         completeAddressFrom = json
+        //     })
 
-        new_addressFrom = value;
+        
         //var str = document.querySelector(".sm-preform__postcodeFrom__mobile").value.substring(0, fromAddressSt) + " , " + value;
+        new_addressFrom = value
+        completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
         document.querySelector(".sm-preform__postcodeFrom__mobile").value = value;
         showFromAddress = true;
         inputFromAddressFlag = false;
@@ -600,19 +720,29 @@
                 showToAddress = false;
             }
 
-            if (value.length >= 2) {
+            if (value.length >= 4) {
 
                 if (value != "") {
-                    fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+
+                    fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
                         method: "GET",
                         mode: "cors",
-                        headers: { "Content-Type": "application/json", },
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
                     })
                         .then((res) => res.json())
                         .then((json) => {
-                            console.log(json)
+                            console.log(json);
+
                             address_loading = true;
-                            addressesTo = json.suggestions.map(item => item).sort();
+                            postcodeTo = json.postcode
+
+                            addressesTo = json.addresses.map((item) => {
+                                item.postcode = json.postcode
+
+                                return item
+                            })
 
                             if (addressesTo.length > 0) {
                                 document.querySelector(".addressesToSet-mobile").style.display = "block";
@@ -623,10 +753,36 @@
                             var x = document.getElementById("addressesToSet-mobile");
                             var str = ""
                             addressesTo.forEach((adr) => {
-                                str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToMobileItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                                str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToMobileItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
                             });
                             x.innerHTML = str;
                         })
+                        .catch((e) => console.error(e));
+
+                    // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                    //     method: "GET",
+                    //     mode: "cors",
+                    //     headers: { "Content-Type": "application/json", },
+                    // })
+                    //     .then((res) => res.json())
+                    //     .then((json) => {
+                    //         console.log(json)
+                    //         address_loading = true;
+                    //         addressesTo = json.suggestions.map(item => item).sort();
+
+                    //         if (addressesTo.length > 0) {
+                    //             document.querySelector(".addressesToSet-mobile").style.display = "block";
+                    //         }
+                    //         else {
+                    //             document.querySelector(".addressesToSet-mobile").style.display = "none";
+                    //         }
+                    //         var x = document.getElementById("addressesToSet-mobile");
+                    //         var str = ""
+                    //         addressesTo.forEach((adr) => {
+                    //             str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToMobileItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                    //         });
+                    //         x.innerHTML = str;
+                    //     })
                 } else {
                     document.querySelector(".postcodeTo-error-mobile").innerHTML = "";
                 }
@@ -639,22 +795,28 @@
 
     function addressesToMobileItemClick(value) {
         document.querySelector(".addressesToSet-mobile").style.display = "none";
-        const id = addressesTo.find(item => item.address == value).id
+        // const id = addressesTo.find(item => item.address == value).id
 
-        fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json)
-                completeAddressTo = json
-            })
-        new_addressTo = value;
+        // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+        //     method: "GET",
+        //     mode: "cors",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        // })
+        //     .then((res) => res.json())
+        //     .then((json) => {
+        //         console.log(json)
+        //         completeAddressTo = json
+        //     })
+
         //var str = document.querySelector(".sm-preform__postcodeTo__mobile").value.substring(0, toAddressSt) + " , " + value;
+        // document.querySelector(".sm-preform__postcodeTo__mobile").value = value;
+        // showToAddress = true;
+        // inputToAddressFlag = false;
+
+        new_addressTo = value
+        completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
         document.querySelector(".sm-preform__postcodeTo__mobile").value = value;
         showToAddress = true;
         inputToAddressFlag = false;
@@ -662,7 +824,7 @@
 
     document.querySelector(".mobile-view").addEventListener("submit", function (e) {
         e.preventDefault();
-        debugger
+        
         if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
             var smfEmail = document.querySelector('input[name="smfEmailMobile"]').value;
             var re = new RegExp(/^.*\//);
@@ -718,8 +880,8 @@
         document.querySelector(".sm-preform-use-address-finder-button-mobile").style.display = "block";
         // Input Postcodes
         document.querySelector('.postcode-inputs-mobile').style.display = "block"
-        document.querySelector('.input-postCodeFrom-mobile').setAttribute("required",'')
-        document.querySelector('.input-postCodeTo-mobile').setAttribute("required",'')
+        document.querySelector('.input-postCodeFrom-mobile').setAttribute("required", '')
+        document.querySelector('.input-postCodeTo-mobile').setAttribute("required", '')
         // Input Postcodes
         document.querySelector(".addressesFromSet-mobile").style.display = "none";
         document.querySelector(".addressesToSet-mobile").style.display = "none";
@@ -1306,9 +1468,9 @@
         display: none;
     }
 
-    .postcode-inputs-mobile{
-        display: none; 
+    .postcode-inputs-mobile {
+        display: none;
         margin-left: 10px;
-         margin-top: 15px;
+        margin-top: 15px;
     }
 </style>
