@@ -485,7 +485,6 @@
         //         completeAddressTo = json
         //     })
         new_addressTo = value;
-        new_addressFrom = value
         completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
         document.querySelector(".sm-preform__postcodeTo").value = value;
         showToAddress = true;
@@ -523,7 +522,6 @@
             obj['moveToAddress'] = new_addressTo
             obj['completeAddressFrom'] = completeAddressFrom
             obj['completeAddressTo'] = completeAddressTo
-
 
             const objEncode64 = window.btoa(JSON.stringify(obj));
 
