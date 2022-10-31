@@ -904,6 +904,11 @@
         selector(".postcodeFrom-error-mobile").style.display = "none";
         new_addressFrom = selector(".sm-preform__postcodeFrom__mobile").value;
         new_addressTo = selector(".sm-preform__postcodeTo__mobile").value;
+
+        //Input placeholders
+        selector(".sm-preform__postcodeFrom__mobile").placeholder = "Enter your previous address";
+        selector(".sm-preform__postcodeTo__mobile").placeholder = "Enter your new address";
+
         manual_addressTo = true;
         manual_addressFrom = true;
 
@@ -926,6 +931,11 @@
         selector(".postcodeTo-error-mobile").style.display = "block";
         selector(".sm-preform__postcodeFrom__mobile").value = new_addressFrom;
         selector(".sm-preform__postcodeTo__mobile").value = new_addressTo;
+
+        //Input placeholders
+        selector(".sm-preform__postcodeFrom__mobile").placeholder = "Enter your previous postcode";
+        selector(".sm-preform__postcodeTo__mobile").placeholder = "Enter your new postcode";
+
         manual_addressFrom = false;
         manual_addressTo = false;
 
