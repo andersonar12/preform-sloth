@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="sm-preform-right">
-            <<!-- video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
+            <!-- video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
                 style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
                 <img style="height: 360px;  object-fit: contain;"
                     src="https://i0.wp.com/bucket-image-container.s3.amazonaws.com/form/formGraphic.png?w=1200&amp;ssl=1"
@@ -157,6 +157,11 @@
     </div>
 </form>
 <script type="text/javascript">
+
+    const selector = (value) => {
+        return document.querySelector(value)
+    }
+
     window.smfSelectedAddresses = [];
     var setupListener = function () {
         addressNow.listen("load", function (control) {
@@ -175,12 +180,12 @@
     }
 
     function show_spinner(postcode) {
-        document.querySelector(".smf-loading-tariffs").innerHTML = `Loading addresses for ${postcode}...`
-        document.querySelector(".suppliers-loading-pre").style.display = "flex";
+        selector(".smf-loading-tariffs").innerHTML = `Loading addresses for ${postcode}...`
+        selector(".suppliers-loading-pre").style.display = "flex";
     }
 
     function hide_spinner() {
-        document.querySelector(".suppliers-loading-pre").style.display = "none";
+        selector(".suppliers-loading-pre").style.display = "none";
     }
 
     let postcodeTo = "";
@@ -216,14 +221,14 @@
     let completeAddressTo = null
 
 
-    document.querySelector(".sm-preform__postcodeFrom").addEventListener("input", function (e) {
+    selector(".sm-preform__postcodeFrom").addEventListener("input", function (e) {
         e.preventDefault();
         let value = e.target.value;
 
         if (manual_addressFrom == false) {
-            document.querySelector(".addressesFromSet").style.display = "none";
+            selector(".addressesFromSet").style.display = "none";
             if (showFromAddress == true) {
-                document.querySelector(".sm-preform__postcodeFrom").value = value.substring(value.length - 1, value.length);
+                selector(".sm-preform__postcodeFrom").value = value.substring(value.length - 1, value.length);
                 value1 = value.substring(value.length - 1, value.length);
                 value = value1;
                 showFromAddress = false;
@@ -253,10 +258,10 @@
                             })
 
                             if (addressesFrom.length > 0) {
-                                document.querySelector(".addressesFromSet").style.display = "block";
+                                selector(".addressesFromSet").style.display = "block";
                             }
                             else {
-                                document.querySelector(".addressesFromSet").style.display = "none";
+                                selector(".addressesFromSet").style.display = "none";
                             }
                             var x = document.getElementById("addressesFromSet");
                             var str = ""
@@ -279,10 +284,10 @@
                     //         addressesFrom = json.suggestions.map(item => item).sort();
 
                     //         if (addressesFrom.length > 0) {
-                    //             document.querySelector(".addressesFromSet").style.display = "block";
+                    //            selector(".addressesFromSet").style.display = "block";
                     //         }
                     //         else {
-                    //             document.querySelector(".addressesFromSet").style.display = "none";
+                    //            selector(".addressesFromSet").style.display = "none";
                     //         }
                     //         var x = document.getElementById("addressesFromSet");
                     //         var str = ""
@@ -296,7 +301,7 @@
 
 
                 } else {
-                    document.querySelector(".postcodeFrom-error").innerHTML = "";
+                    selector(".postcodeFrom-error").innerHTML = "";
                 }
             }
 
@@ -309,12 +314,12 @@
     //Inputs Postcodes Manuals
     const inputsPostcodesManuals = (postCodeFrom, postcodeFromError, postCodeTo, postcodeToError) => {
         const errorInputs = (className) => {
-            document.querySelector(className).style.display = "block"
-            document.querySelector(className).innerHTML = "Enter a valid postcode"
+            selector(className).style.display = "block"
+            selector(className).innerHTML = "Enter a valid postcode"
         }
 
         const clearErrors = (className) => {
-            document.querySelector(className).style.display = "none"
+            selector(className).style.display = "none"
         }
 
         /* tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. */
@@ -324,7 +329,7 @@
             return postcodeRegEx.test(p);
         }
 
-        document.querySelector(postCodeFrom).addEventListener("input", (e) => {
+        selector(postCodeFrom).addEventListener("input", (e) => {
             e.preventDefault();
             let value = e.target.value;
 
@@ -338,7 +343,7 @@
             }
         })
 
-        document.querySelector(postCodeTo).addEventListener("input", (e) => {
+        selector(postCodeTo).addEventListener("input", (e) => {
             e.preventDefault();
             let value = e.target.value;
 
@@ -361,7 +366,7 @@
 
     //Inputs Postcodes Manuals
     function addressesFromItemClick(value) {
-        document.querySelector(".addressesFromSet").style.display = "none";
+        selector(".addressesFromSet").style.display = "none";
 
         // const id = addressesFrom.find(item => item.address == value).id
 
@@ -380,17 +385,17 @@
 
         new_addressFrom = value
         completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
-        document.querySelector(".sm-preform__postcodeFrom").value = value;
+        selector(".sm-preform__postcodeFrom").value = value;
         showFromAddress = true;
         inputFromAddressFlag = false;
     }
-    document.querySelector(".sm-preform__postcodeTo").addEventListener("input", function (e) {
+    selector(".sm-preform__postcodeTo").addEventListener("input", function (e) {
         e.preventDefault();
         let value = e.target.value;
         if (manual_addressFrom == false) {
-            document.querySelector(".addressesToSet").style.display = "none";
+            selector(".addressesToSet").style.display = "none";
             if (showToAddress == true) {
-                document.querySelector(".sm-preform__postcodeTo").value = value.substring(value.length - 1, value.length);
+                selector(".sm-preform__postcodeTo").value = value.substring(value.length - 1, value.length);
                 value1 = value.substring(value.length - 1, value.length);
                 value = value1;
                 showToAddress = false;
@@ -421,10 +426,10 @@
                             })
 
                             if (addressesTo.length > 0) {
-                                document.querySelector(".addressesToSet").style.display = "block";
+                                selector(".addressesToSet").style.display = "block";
                             }
                             else {
-                                document.querySelector(".addressesToSet").style.display = "none";
+                                selector(".addressesToSet").style.display = "none";
                             }
                             var x = document.getElementById("addressesToSet");
                             var str = ""
@@ -447,10 +452,10 @@
                     //         addressesTo = json.suggestions.map(item => item).sort();
 
                     //         if (addressesTo.length > 0) {
-                    //             document.querySelector(".addressesToSet").style.display = "block";
+                    //            selector(".addressesToSet").style.display = "block";
                     //         }
                     //         else {
-                    //             document.querySelector(".addressesToSet").style.display = "none";
+                    //            selector(".addressesToSet").style.display = "none";
                     //         }
                     //         var x = document.getElementById("addressesToSet");
                     //         var str = ""
@@ -460,7 +465,7 @@
                     //         x.innerHTML = str;
                     //     })
                 } else {
-                    document.querySelector(".postcodeTo-error").innerHTML = "";
+                    selector(".postcodeTo-error").innerHTML = "";
                 }
             }
         }
@@ -469,7 +474,7 @@
         }
     });
     function addressesToItemClick(value) {
-        document.querySelector(".addressesToSet").style.display = "none";
+        selector(".addressesToSet").style.display = "none";
         // const id = addressesTo.find(item => item.address == value).id
 
         // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
@@ -486,18 +491,18 @@
         //     })
         new_addressTo = value;
         completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
-        document.querySelector(".sm-preform__postcodeTo").value = value;
+        selector(".sm-preform__postcodeTo").value = value;
         showToAddress = true;
         inputToAddressFlag = false;
 
 
-        //var str = document.querySelector(".sm-preform__postcodeTo").value.substring(0, toAddressSt) + " , " + value;
+        //var str =selector(".sm-preform__postcodeTo").value.substring(0, toAddressSt) + " , " + value;
     }
-    document.querySelector(".desktop-view").addEventListener("submit", function (e) {
-        e.preventDefault();
+    selector(".desktop-view").addEventListener("submit", function (e) {
+        e.preventDefault()
 
         if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
-            var smfEmail = document.querySelector('input[name="smfEmail"]').value;
+            var smfEmail = selector('input[name="smfEmail"]').value;
             var re = new RegExp(/^.*\//);
             document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
                 postcodeTo +
@@ -513,7 +518,7 @@
                 smfEmail;
         }
         else if (postcodeTo_error == '' && postcodeFrom_error == '') {
-            var smfEmail = document.querySelector('input[name="smfEmail"]').value;
+            var smfEmail = selector('input[name="smfEmail"]').value;
 
             let obj = {}
 
@@ -524,6 +529,9 @@
             obj['completeAddressTo'] = completeAddressTo
 
             const objEncode64 = window.btoa(JSON.stringify(obj));
+
+
+
 
             if (completeAddressFrom && completeAddressTo) {
                 console.log(obj)
@@ -547,48 +555,57 @@
     })
     function enterAddressManuallyButtonClick() {
         enterAddressManuallyMobileButtonClick();
-        document.querySelector(".sm-preform-enter-address-manually-button").style.display = "none";
-        document.querySelector(".sm-preform-use-address-finder-button").style.display = "block";
+        selector(".sm-preform-enter-address-manually-button").style.display = "none";
+        selector(".sm-preform-use-address-finder-button").style.display = "block";
         // Input Postcodes
-        document.querySelector('.postcode-inputs').style.display = "flex"
-        document.querySelector('.input-postCodeFrom').setAttribute("required", '')
-        document.querySelector('.input-postCodeTo').setAttribute("required", '')
+        selector('.postcode-inputs').style.display = "flex"
+        selector('.input-postCodeFrom').setAttribute("required", '')
+        selector('.input-postCodeTo').setAttribute("required", '')
         // Input Postcodes
-        document.querySelector(".addressesFromSet").style.display = "none";
-        document.querySelector(".addressesToSet").style.display = "none";
-        document.querySelector(".postcodeTo-error").style.display = "none";
-        document.querySelector(".postcodeFrom-error").style.display = "none";
-        new_addressFrom = document.querySelector(".sm-preform__postcodeFrom").value;
-        new_addressTo = document.querySelector(".sm-preform__postcodeTo").value;
+        selector(".addressesFromSet").style.display = "none";
+        selector(".addressesToSet").style.display = "none";
+        selector(".postcodeTo-error").style.display = "none";
+        selector(".postcodeFrom-error").style.display = "none";
+        new_addressFrom = selector(".sm-preform__postcodeFrom").value;
+        new_addressTo = selector(".sm-preform__postcodeTo").value;
+
+        //Input placeholders
+        selector(".sm-preform__postcodeFrom").placeholder = "Enter your previous address";
+        selector(".sm-preform__postcodeTo").placeholder = "Enter your new address";
+
         manual_addressTo = true;
         manual_addressFrom = true;
     }
     function useAddressFinderButtonClick() {
         useAddressFinderMobileButtonClick();
-        document.querySelector(".sm-preform-enter-address-manually-button").style.display = "block";
-        document.querySelector(".sm-preform-use-address-finder-button").style.display = "none";
+        selector(".sm-preform-enter-address-manually-button").style.display = "block";
+        selector(".sm-preform-use-address-finder-button").style.display = "none";
         //Input Postcodes
-        document.querySelector('.postcode-inputs').style.display = "none"
-        document.querySelector('.input-postCodeFrom').removeAttribute("required")
-        document.querySelector('.input-postCodeTo').removeAttribute("required")
+        selector('.postcode-inputs').style.display = "none"
+        selector('.input-postCodeFrom').removeAttribute("required")
+        selector('.input-postCodeTo').removeAttribute("required")
         //Input Postcodes
-        document.querySelector(".postcodeFrom-error").style.display = "block";
-        document.querySelector(".postcodeTo-error").style.display = "block";
-        document.querySelector(".sm-preform__postcodeFrom").value = new_addressFrom;
-        document.querySelector(".sm-preform__postcodeTo").value = new_addressTo;
+        selector(".postcodeFrom-error").style.display = "block";
+        selector(".postcodeTo-error").style.display = "block";
+        selector(".sm-preform__postcodeFrom").value = new_addressFrom;
+        selector(".sm-preform__postcodeTo").value = new_addressTo;
+        
+         //Input placeholders
+        selector(".sm-preform__postcodeFrom").placeholder = "Enter your previous postcode";
+        selector(".sm-preform__postcodeTo").placeholder = "Enter your new postcode";
         manual_addressFrom = false;
         manual_addressTo = false;
 
-        document.querySelector("#input-postCodeFrom").value = ""
-        document.querySelector("#input-postCodeTo").value = ""
+        selector(".input-postCodeFrom").value = ""
+        selector(".input-postCodeTo").value = ""
     }
 
     window.onload = init;
     function init() {
-        document.querySelector(".addressesToSet").style.display = "none";
-        document.querySelector(".addressesFromSet").style.display = "none";
-        document.querySelector(".addressesFromSet-mobile").style.display = "none";
-        document.querySelector(".addressesToSet-mobile").style.display = "none";
+        selector(".addressesToSet").style.display = "none";
+        selector(".addressesFromSet").style.display = "none";
+        selector(".addressesFromSet-mobile").style.display = "none";
+        selector(".addressesToSet-mobile").style.display = "none";
 
         if (postcodeTo != "" && postcodeFrom != "" && new_addressTo != "" && new_addressFrom != "") {
             postcodeTo_error = '';
@@ -597,13 +614,13 @@
     }
 
     //logic for mobile view
-    document.querySelector(".sm-preform__postcodeFrom__mobile").addEventListener("input", function (e) {
+    selector(".sm-preform__postcodeFrom__mobile").addEventListener("input", function (e) {
         e.preventDefault();
         let value = e.target.value;
         if (manual_addressFrom == false) {
-            document.querySelector(".addressesFromSet-mobile").style.display = "none";
+            selector(".addressesFromSet-mobile").style.display = "none";
             if (showFromAddress == true) {
-                document.querySelector(".sm-preform__postcodeFrom__mobile").value = value.substring(value.length - 1, value.length);
+                selector(".sm-preform__postcodeFrom__mobile").value = value.substring(value.length - 1, value.length);
                 value1 = value.substring(value.length - 1, value.length);
                 value = value1;
                 showFromAddress = false;
@@ -633,10 +650,10 @@
                             })
 
                             if (addressesFrom.length > 0) {
-                                document.querySelector(".addressesFromSet-mobile").style.display = "block";
+                                selector(".addressesFromSet-mobile").style.display = "block";
                             }
                             else {
-                                document.querySelector(".addressesFromSet-mobile").style.display = "none";
+                                selector(".addressesFromSet-mobile").style.display = "none";
                             }
                             var x = document.getElementById("addressesFromSet-mobile");
                             var str = ""
@@ -659,10 +676,10 @@
                     //         addressesFrom = json.suggestions.map(item => item).sort();
 
                     //         if (addressesFrom.length > 0) {
-                    //             document.querySelector(".addressesFromSet-mobile").style.display = "block"
+                    //            selector(".addressesFromSet-mobile").style.display = "block"
                     //         }
                     //         else {
-                    //             document.querySelector(".addressesFromSet-mobile").style.display = "none";
+                    //            selector(".addressesFromSet-mobile").style.display = "none";
                     //         }
                     //         var x = document.getElementById("addressesFromSet-mobile");
                     //         var str = ""
@@ -673,7 +690,7 @@
                     //     })
 
                 } else {
-                    document.querySelector(".postcodeFrom-error-mobile").innerHTML = "";
+                    selector(".postcodeFrom-error-mobile").innerHTML = "";
                 }
             }
         }
@@ -682,7 +699,7 @@
         }
     });
     function addressesFromMobileItemClick(value) {
-        document.querySelector(".addressesFromSet-mobile").style.display = "none";
+        selector(".addressesFromSet-mobile").style.display = "none";
         // const id = addressesFrom.find(item => item.address == value).id
 
         // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
@@ -698,21 +715,21 @@
         //         completeAddressFrom = json
         //     })
 
-        
-        //var str = document.querySelector(".sm-preform__postcodeFrom__mobile").value.substring(0, fromAddressSt) + " , " + value;
+
+        //var str =selector(".sm-preform__postcodeFrom__mobile").value.substring(0, fromAddressSt) + " , " + value;
         new_addressFrom = value
         completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
-        document.querySelector(".sm-preform__postcodeFrom__mobile").value = value;
+        selector(".sm-preform__postcodeFrom__mobile").value = value;
         showFromAddress = true;
         inputFromAddressFlag = false;
     }
-    document.querySelector(".sm-preform__postcodeTo__mobile").addEventListener("input", function (e) {
+    selector(".sm-preform__postcodeTo__mobile").addEventListener("input", function (e) {
         e.preventDefault();
         let value = e.target.value;
         if (manual_addressTo == false) {
-            document.querySelector(".addressesToSet-mobile").style.display = "none";
+            selector(".addressesToSet-mobile").style.display = "none";
             if (showToAddress == true) {
-                document.querySelector(".sm-preform__postcodeTo__mobile").value = value.substring(value.length - 1, value.length);
+                selector(".sm-preform__postcodeTo__mobile").value = value.substring(value.length - 1, value.length);
                 value1 = value.substring(value.length - 1, value.length);
                 value = value1;
                 showToAddress = false;
@@ -743,10 +760,10 @@
                             })
 
                             if (addressesTo.length > 0) {
-                                document.querySelector(".addressesToSet-mobile").style.display = "block";
+                                selector(".addressesToSet-mobile").style.display = "block";
                             }
                             else {
-                                document.querySelector(".addressesToSet-mobile").style.display = "none";
+                                selector(".addressesToSet-mobile").style.display = "none";
                             }
                             var x = document.getElementById("addressesToSet-mobile");
                             var str = ""
@@ -769,10 +786,10 @@
                     //         addressesTo = json.suggestions.map(item => item).sort();
 
                     //         if (addressesTo.length > 0) {
-                    //             document.querySelector(".addressesToSet-mobile").style.display = "block";
+                    //            selector(".addressesToSet-mobile").style.display = "block";
                     //         }
                     //         else {
-                    //             document.querySelector(".addressesToSet-mobile").style.display = "none";
+                    //            selector(".addressesToSet-mobile").style.display = "none";
                     //         }
                     //         var x = document.getElementById("addressesToSet-mobile");
                     //         var str = ""
@@ -782,7 +799,7 @@
                     //         x.innerHTML = str;
                     //     })
                 } else {
-                    document.querySelector(".postcodeTo-error-mobile").innerHTML = "";
+                    selector(".postcodeTo-error-mobile").innerHTML = "";
                 }
             }
         }
@@ -792,7 +809,7 @@
     });
 
     function addressesToMobileItemClick(value) {
-        document.querySelector(".addressesToSet-mobile").style.display = "none";
+        selector(".addressesToSet-mobile").style.display = "none";
         // const id = addressesTo.find(item => item.address == value).id
 
         // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
@@ -808,23 +825,23 @@
         //         completeAddressTo = json
         //     })
 
-        //var str = document.querySelector(".sm-preform__postcodeTo__mobile").value.substring(0, toAddressSt) + " , " + value;
-        // document.querySelector(".sm-preform__postcodeTo__mobile").value = value;
+        //var str =selector(".sm-preform__postcodeTo__mobile").value.substring(0, toAddressSt) + " , " + value;
+        //selector(".sm-preform__postcodeTo__mobile").value = value;
         // showToAddress = true;
         // inputToAddressFlag = false;
 
         new_addressTo = value
         completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
-        document.querySelector(".sm-preform__postcodeTo__mobile").value = value;
+        selector(".sm-preform__postcodeTo__mobile").value = value;
         showToAddress = true;
         inputToAddressFlag = false;
     }
 
-    document.querySelector(".mobile-view").addEventListener("submit", function (e) {
+    selector(".mobile-view").addEventListener("submit", function (e) {
         e.preventDefault();
-        
+
         if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
-            var smfEmail = document.querySelector('input[name="smfEmailMobile"]').value;
+            var smfEmail = selector('input[name="smfEmailMobile"]').value;
             var re = new RegExp(/^.*\//);
             document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
                 postcodeTo +
@@ -840,7 +857,7 @@
                 smfEmail;
         }
         else if (postcodeTo_error == '' && postcodeFrom_error == '') {
-            var smfEmail = document.querySelector('input[name="smfEmailMobile"]').value;
+            var smfEmail = selector('input[name="smfEmailMobile"]').value;
 
             let obj = {}
 
@@ -874,51 +891,51 @@
         }
     })
     function enterAddressManuallyMobileButtonClick() {
-        document.querySelector(".sm-preform-enter-address-manually-button-mobile").style.display = "none";
-        document.querySelector(".sm-preform-use-address-finder-button-mobile").style.display = "block";
+        selector(".sm-preform-enter-address-manually-button-mobile").style.display = "none";
+        selector(".sm-preform-use-address-finder-button-mobile").style.display = "block";
         // Input Postcodes
-        document.querySelector('.postcode-inputs-mobile').style.display = "block"
-        document.querySelector('.input-postCodeFrom-mobile').setAttribute("required", '')
-        document.querySelector('.input-postCodeTo-mobile').setAttribute("required", '')
+        selector('.postcode-inputs-mobile').style.display = "block"
+        selector('.input-postCodeFrom-mobile').setAttribute("required", '')
+        selector('.input-postCodeTo-mobile').setAttribute("required", '')
         // Input Postcodes
-        document.querySelector(".addressesFromSet-mobile").style.display = "none";
-        document.querySelector(".addressesToSet-mobile").style.display = "none";
-        document.querySelector(".postcodeTo-error-mobile").style.display = "none";
-        document.querySelector(".postcodeFrom-error-mobile").style.display = "none";
-        new_addressFrom = document.querySelector(".sm-preform__postcodeFrom__mobile").value;
-        new_addressTo = document.querySelector(".sm-preform__postcodeTo__mobile").value;
+        selector(".addressesFromSet-mobile").style.display = "none";
+        selector(".addressesToSet-mobile").style.display = "none";
+        selector(".postcodeTo-error-mobile").style.display = "none";
+        selector(".postcodeFrom-error-mobile").style.display = "none";
+        new_addressFrom = selector(".sm-preform__postcodeFrom__mobile").value;
+        new_addressTo = selector(".sm-preform__postcodeTo__mobile").value;
         manual_addressTo = true;
         manual_addressFrom = true;
 
-        document.querySelector(".sm-preform-enter-address-manually-button").style.display = "none";
-        document.querySelector(".sm-preform-use-address-finder-button").style.display = "block";
-        document.querySelector(".addressesFromSet").style.display = "none";
-        document.querySelector(".addressesToSet").style.display = "none";
-        document.querySelector(".postcodeTo-error").style.display = "none";
-        document.querySelector(".postcodeFrom-error").style.display = "none";
+        selector(".sm-preform-enter-address-manually-button").style.display = "none";
+        selector(".sm-preform-use-address-finder-button").style.display = "block";
+        selector(".addressesFromSet").style.display = "none";
+        selector(".addressesToSet").style.display = "none";
+        selector(".postcodeTo-error").style.display = "none";
+        selector(".postcodeFrom-error").style.display = "none";
     }
     function useAddressFinderMobileButtonClick() {
-        document.querySelector(".sm-preform-enter-address-manually-button-mobile").style.display = "block";
-        document.querySelector(".sm-preform-use-address-finder-button-mobile").style.display = "none";
+        selector(".sm-preform-enter-address-manually-button-mobile").style.display = "block";
+        selector(".sm-preform-use-address-finder-button-mobile").style.display = "none";
         //Input Postcodes
-        document.querySelector('.postcode-inputs-mobile').style.display = "none"
-        document.querySelector('.input-postCodeFrom-mobile').removeAttribute("required")
-        document.querySelector('.input-postCodeTo-mobile').removeAttribute("required")
+        selector('.postcode-inputs-mobile').style.display = "none"
+        selector('.input-postCodeFrom-mobile').removeAttribute("required")
+        selector('.input-postCodeTo-mobile').removeAttribute("required")
         //Input Postcodes
-        document.querySelector(".postcodeFrom-error-mobile").style.display = "block";
-        document.querySelector(".postcodeTo-error-mobile").style.display = "block";
-        document.querySelector(".sm-preform__postcodeFrom__mobile").value = new_addressFrom;
-        document.querySelector(".sm-preform__postcodeTo__mobile").value = new_addressTo;
+        selector(".postcodeFrom-error-mobile").style.display = "block";
+        selector(".postcodeTo-error-mobile").style.display = "block";
+        selector(".sm-preform__postcodeFrom__mobile").value = new_addressFrom;
+        selector(".sm-preform__postcodeTo__mobile").value = new_addressTo;
         manual_addressFrom = false;
         manual_addressTo = false;
 
-        document.querySelector(".sm-preform-enter-address-manually-button").style.display = "block";
-        document.querySelector(".sm-preform-use-address-finder-button").style.display = "none";
-        document.querySelector(".postcodeTo-error").style.display = "block";
-        document.querySelector(".postcodeFrom-error").style.display = "block";
+        selector(".sm-preform-enter-address-manually-button").style.display = "block";
+        selector(".sm-preform-use-address-finder-button").style.display = "none";
+        selector(".postcodeTo-error").style.display = "block";
+        selector(".postcodeFrom-error").style.display = "block";
 
-        document.querySelector(".input-postCodeFrom-mobile").value = ""
-        document.querySelector(".input-postCodeTo-mobile").value = ""
+        selector(".input-postCodeFrom-mobile").value = ""
+        selector(".input-postCodeTo-mobile").value = ""
     }
 </script>
 
