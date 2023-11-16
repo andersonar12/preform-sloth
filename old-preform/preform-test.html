@@ -1,0 +1,1438 @@
+<div class="preform-instance">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700, 800&amp;display=swap" rel="stylesheet">
+    
+    <form class="desktop-view">
+        <div class="sm-preform">
+            <div class="sm-preform-left">
+                <div class="sm-preform-left-title">Update your address with <span style="font-weight: bold;">State Pension,</span>
+                    HMRC, and many others </div>
+                <div class="sm-preform-left-content">The award-winning change of service</div>
+                <div class="sm-preform-input-email-padding" style="display: flex;">
+                    <input class="sm-preform__input sm-preform-input-email-width" placeholder="Your email" type="email"
+                        name="smfEmail" required />
+                </div>
+                <div class="sm-preform-left-inputs">
+                    <div>
+                        <input class="sm-preform__input sm-preform__postcodeFrom sm-preform-input-postcode-width"
+                            type="text" placeholder="Your previous postcode" name="smfPostCodeFrom" required />
+                        <!-- <p class="error postcodeFrom-error"></p> -->
+                    </div>
+                    <div>
+                        <input class="sm-preform__input sm-preform__postcodeTo sm-preform-input-postcode-width"
+                            id="sm-preform__postCodeTo" type="text" name="smfPostCode" placeholder="Your new postcode"
+                            style="margin-left: 19px;" required />
+                        <!-- <p class="error postcodeTo-error"></p> -->
+                    </div>
+                </div>
+                <!-- Postcodes when entry address manual -->
+                <div class="sm-preform-left-inputs postcode-inputs">
+                    <div>
+                        <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom" type="text"
+                            placeholder="Old Postcode" name="smfPostCodeFrom" />
+                        <p class="error postcodeFrom-error"></p>
+                    </div>
+                    <div>
+                        <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo" type="text"
+                            name="smfPostCode" placeholder="New Postcode" style="margin-left: 25px;" />
+                        <p class="error postcodeTo-error" style="margin-left: 25px;"></p>
+                    </div>
+                </div>
+                <!-- Postcodes when entry address manual -->
+                <div class="sm-preform-address-set">
+                    <div class="addressesFromSet" id="addressesFromSet">
+                    </div>
+                    <div class="addressesToSet" id="addressesToSet">
+                    </div>
+                </div>
+                <div class="sm-preform-left-buttons">
+                    <div>
+                        <div class="sm-preform-left-buttons-trustpilot">
+                            <div>
+                                <img class="sm-preform-left-buttons-trustpilot-icon" alt="Trustpilot" width="100"
+                                    height="35"
+                                    data-src="https://cdn.anyvan.com/images/trustpilot2021/brandmark_gr-blk.svg?v=327b66faf217f9259e3f51f0d2fe62bb2013cc0a"
+                                    src="https://cdn.anyvan.com/images/trustpilot2021/brandmark_gr-blk.svg?v=327b66faf217f9259e3f51f0d2fe62bb2013cc0a">
+                            </div>
+                            <div class="sm-preform-left-buttons-trustpilot-content">
+                            </div>
+                        </div>
+                        <div>
+                            <img class="lozad" src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"
+                                alt="Trustpilot" width="150" data-loaded="true">
+                        </div>
+                    </div>
+                    <button class="sm-preform__submit" type="submit" style="margin-right: 28px;"><span
+                            style="font-weight: bold;">Update State Pension</span>&nbsp;</button>
+                </div>
+                <div class="sm-preform-enter-address-manually-part">
+                    <div class="sm-preform-enter-address-manually-button" onclick="enterAddressManuallyButtonClick()"
+                        style="margin-right: 28px;">
+                        Enter address manually</div>
+                    <div class="sm-preform-use-address-finder-button" onclick="useAddressFinderButtonClick()">Use
+                        address finder</div>
+                </div>
+            </div>
+            <div class="sm-preform-right">
+                <!-- video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
+                    style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
+                    <img style="height: 360px;  object-fit: contain;"
+                        src="https://bucket-image-container.s3.amazonaws.com/images/slothmove+logo-4.png"
+                        width="360" height="360">
+            </div>
+        </div>
+    </form>
+    <form class="mobile-view">
+        <div class="sm-preform-mobile">
+            <div class="sm-preform-mobile-logo">
+                <!-- <video src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/Form_Header_frame.mp4"
+                    style="height: 360px;  object-fit: contain;" autoplay muted loop></video> -->
+                <!-- <img src="https://bucket-image-container.s3.amazonaws.com/slotmove-page/banner-preform.png"
+                    style="height: 280px; width: 90%; object-fit: contain;"></img> -->
+                <img style="height: 300px;  object-fit: contain;"
+                    src="https://bucket-image-container.s3.amazonaws.com/images/slothmove+logo-4.png"
+                    width="360" height="360">
+            </div>
+            <div class="sm-preform-mobile-title">Update your address with <span style="font-weight: bold;">State Pension,</span>
+                    HMRC, and many others</div>
+            <div class="sm-preform-mobile-content">The award-winning change of address service</div>
+            <div class="sm-preform-mobile-input">
+                <input class="sm-preform__input sm-preform-mobile-email-input-width" placeholder="Your email" type="email"
+                    name="smfEmailMobile" required />
+            </div>
+            <div class="sm-preform-mobile-input">
+                <input class="sm-preform__input sm-preform__postcodeFrom__mobile sm-preform-mobile-email-input-width"
+                    type="text" placeholder="Enter your previous postcode" name="smfPostCodeFrom" required />
+                <!-- <p class="error postcodeFrom-error-mobile"></p> -->
+            </div>
+            <div class="addressesFromSet-mobile" id="addressesFromSet-mobile">
+            </div>
+            <div class="sm-preform-mobile-input">
+                <input class="sm-preform__input sm-preform__postcodeTo__mobile sm-preform-mobile-email-input-width"
+                    type="text" name="smfPostCode" placeholder="Your new postcode" required />
+                <!-- <p class="error postcodeTo-error-mobile"></p> -->
+            </div>
+            <!-- Inputs Postcodes -->
+            <div class="sm-preform-left-inputs postcode-inputs-mobile">
+                <div>
+                    <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeFrom-mobile" type="text"
+                        style="width: 98%;" placeholder="Old Postcode" name="smfPostCodeFrom" />
+                    <p class="error postcodeFrom-error-mobile"></p>
+                </div>
+                <div>
+                    <input class="sm-preform__input sm-preform-input-postcode-width input-postCodeTo-mobile" type="text"
+                        name="smfPostCode" placeholder="New Postcode" style="width: 98%; margin-top: 15px;" />
+                    <p class="error postcodeTo-error-mobile" style="margin-top: 15px;"></p>
+                </div>
+            </div>
+            <!-- Inputs Postcodes -->
+            <div class="addressesToSet-mobile" id="addressesToSet-mobile">
+            </div>
+            <div>
+                <button class="sm-preform__submit-mobile" type="submit"><span style="font-weight: bold;">Update State Pension</span> &nbsp;</button>
+            </div>
+            <div class="sm-preform-enter-address-manually-part-mobile">
+                <div class="sm-preform-enter-address-manually-button-mobile"
+                    onclick="enterAddressManuallyMobileButtonClick()">Enter address manually</div>
+                <div class="sm-preform-use-address-finder-button-mobile" onclick="useAddressFinderMobileButtonClick()">
+                    Use address finder</div>
+            </div>
+            <div class="sm-preform-trustpilot-mobile">
+                <div class="sm-preform-trustpilot-mobile-width">
+                    <div class="sm-preform-left-buttons-trustpilot">
+                        <div>
+                            <img class="sm-preform-left-buttons-trustpilot-icon" alt="Trustpilot" width="90" height="20"
+                                data-src="https://cdn.anyvan.com/images/trustpilot2021/brandmark_gr-blk.svg?v=327b66faf217f9259e3f51f0d2fe62bb2013cc0a"
+                                src="https://cdn.anyvan.com/images/trustpilot2021/brandmark_gr-blk.svg?v=327b66faf217f9259e3f51f0d2fe62bb2013cc0a">
+                        </div>
+                        <div class="sm-preform-left-buttons-trustpilot-content-mobile">
+                        </div>
+                    </div>
+                    <div>
+                        <img class="lozad" src="https://cdn.trustpilot.net/brand-assets/4.1.0/stars/stars-4.5.svg"
+                            alt="Trustpilot" width="175" data-loaded="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    
+        const selector = (value) => {
+            return document.querySelector(value)
+        }
+    
+        window.smfSelectedAddresses = [];
+        var setupListener = function () {
+            addressNow.listen("load", function (control) {
+                control.listen("populate", function (address) {
+                    window.smfSelectedAddresses.push(
+                        address.Label.split("\n").join(", ")
+                    );
+                });
+            });
+        };
+    
+        function uuidv4() {
+            return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, function (c) {
+                return (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16);
+            });
+        }
+    
+        function show_spinner(postcode) {
+            selector(".smf-loading-tariffs").innerHTML = `Loading addresses for ${postcode}...`
+            selector(".suppliers-loading-pre").style.display = "flex";
+        }
+    
+        function hide_spinner() {
+            selector(".suppliers-loading-pre").style.display = "none";
+        }
+    
+        let postcodeTo = "";
+        let addressesTo = [];
+        let show_addressesTo = false;
+        let postcodeTo_error = "";
+        let address_loading = false;
+        let manual_addressTo = false;
+        let valid_postcodeTo = false;
+        let outcode = "";
+        let new_addressTo = "";
+        let automatic_addressTo = false;
+        var manualTo = false
+        let postcodeFrom = "";
+        let addressesFrom = [];
+        let show_addressesFrom = false;
+        let postcodeFrom_error = "";
+        let manual_addressFrom = false;
+        let valid_postcodeFrom = false;
+        let new_addressFrom = "";
+        let automatic_addressFrom = false;
+        let inputFromAddressFlag = false;
+        let inputFromAddressFirstFlag = false;
+        let fromAddressSt = 0, fromAddressEn = 0;
+        let showFromAddress = false;
+        let inputToAddressFlag = false;
+        let inputToAddressFirstFlag = false;
+        let toAddressSt = 0, toAddressEn = 0;
+        let showToAddress = false;
+    
+        let backendUrl = 'https://www.slothmover.co.uk:8443'
+        let completeAddressFrom = null
+        let completeAddressTo = null
+    
+    
+        selector(".sm-preform__postcodeFrom").addEventListener("input", function (e) {
+            e.preventDefault();
+            let value = e.target.value;
+    
+            if (manual_addressFrom == false) {
+                selector(".addressesFromSet").style.display = "none";
+                if (showFromAddress == true) {
+                    selector(".sm-preform__postcodeFrom").value = value.substring(value.length - 1, value.length);
+                    value1 = value.substring(value.length - 1, value.length);
+                    value = value1;
+                    showFromAddress = false;
+                }
+    
+                if (value.length >= 4) {
+    
+                    if (value != "") {
+    
+                        fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        })
+                            .then((res) => res.json())
+                            .then((json) => {
+                                console.log(json);
+    
+                                address_loading = true;
+                                postcodeFrom = json.postcode
+                                addressesFrom = json.addresses.map((item) => {
+                                    item.postcode = json.postcode
+    
+                                    return item
+                                })
+    
+                                if (addressesFrom.length > 0) {
+                                    selector(".addressesFromSet").style.display = "block";
+                                }
+                                else {
+                                    selector(".addressesFromSet").style.display = "none";
+                                }
+                                var x = document.getElementById("addressesFromSet");
+                                var str = ""
+                                addressesFrom.forEach((adr) => {
+                                    str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
+                                });
+                                x.innerHTML = str;
+                            })
+                            .catch((e) => console.error(e));
+    
+                        // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                        //     method: "GET",
+                        //     mode: "cors",
+                        //     headers: { "Content-Type": "application/json", },
+                        // })
+                        //     .then((res) => res.json())
+                        //     .then((json) => {
+                        //         console.log(json)
+                        //         address_loading = true;
+                        //         addressesFrom = json.suggestions.map(item => item).sort();
+    
+                        //         if (addressesFrom.length > 0) {
+                        //            selector(".addressesFromSet").style.display = "block";
+                        //         }
+                        //         else {
+                        //            selector(".addressesFromSet").style.display = "none";
+                        //         }
+                        //         var x = document.getElementById("addressesFromSet");
+                        //         var str = ""
+                        //         addressesFrom.forEach((adr) => {
+                        //             str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                        //         });
+                        //         x.innerHTML = str;
+                        //     })
+    
+    
+    
+    
+                    } else {
+                        selector(".postcodeFrom-error").innerHTML = "";
+                    }
+                }
+    
+            }
+            else {
+                new_addressFrom = value;
+            }
+        });
+    
+        //Inputs Postcodes Manuals
+        const inputsPostcodesManuals = (postCodeFrom, postcodeFromError, postCodeTo, postcodeToError) => {
+            const errorInputs = (className) => {
+                selector(className).style.display = "block"
+                selector(className).innerHTML = "Enter a valid postcode"
+            }
+    
+            const clearErrors = (className) => {
+                selector(className).style.display = "none"
+            }
+    
+            /* tests to see if string is in correct UK style postcode: AL1 1AB, BM1 5YZ etc. */
+            function isValidPostcode(p) {
+                var postcodeRegEx = /^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}$/i;
+    
+                return postcodeRegEx.test(p);
+            }
+    
+            selector(postCodeFrom).addEventListener("input", (e) => {
+                e.preventDefault();
+                let value = e.target.value;
+    
+                console.log(isValidPostcode(value))
+                if (value == "" || !isValidPostcode(value)) {
+                    errorInputs(postcodeFromError)
+                    postcodeFrom = ""
+                } else {
+                    clearErrors(postcodeFromError)
+                    postcodeFrom = value
+                }
+            })
+    
+            selector(postCodeTo).addEventListener("input", (e) => {
+                e.preventDefault();
+                let value = e.target.value;
+    
+                console.log(isValidPostcode(value))
+                if (value == "" || !isValidPostcode(value)) {
+                    errorInputs(postcodeToError)
+                    postcodeTo = ""
+                } else {
+                    clearErrors(postcodeToError)
+                    postcodeTo = value
+                }
+            })
+        }
+        inputsPostcodesManuals(".input-postCodeFrom", '.postcodeFrom-error', ".input-postCodeTo", '.postcodeTo-error')
+    
+        //load validation in mobile view
+        if (window.innerWidth <= 1000) {
+            inputsPostcodesManuals(".input-postCodeFrom-mobile", '.postcodeFrom-error-mobile', ".input-postCodeTo-mobile", '.postcodeTo-error-mobile')
+        }
+    
+        //Inputs Postcodes Manuals
+        function addressesFromItemClick(value) {
+            selector(".addressesFromSet").style.display = "none";
+    
+            // const id = addressesFrom.find(item => item.address == value).id
+    
+            // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+            //     method: "GET",
+            //     mode: "cors",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            //     .then((res) => res.json())
+            //     .then((json) => {
+            //         console.log(json)
+            //         completeAddressFrom = json
+            //     })
+    
+            new_addressFrom = value
+            completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
+            selector(".sm-preform__postcodeFrom").value = value;
+            showFromAddress = true;
+            inputFromAddressFlag = false;
+        }
+        selector(".sm-preform__postcodeTo").addEventListener("input", function (e) {
+            e.preventDefault();
+            let value = e.target.value;
+            if (manual_addressFrom == false) {
+                selector(".addressesToSet").style.display = "none";
+                if (showToAddress == true) {
+                    selector(".sm-preform__postcodeTo").value = value.substring(value.length - 1, value.length);
+                    value1 = value.substring(value.length - 1, value.length);
+                    value = value1;
+                    showToAddress = false;
+                }
+    
+                if (value.length >= 4) {
+    
+                    if (value != "") {
+    
+                        fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        })
+                            .then((res) => res.json())
+                            .then((json) => {
+                                console.log(json);
+    
+                                address_loading = true;
+                                postcodeTo = json.postcode
+    
+                                addressesTo = json.addresses.map((item) => {
+                                    item.postcode = json.postcode
+    
+                                    return item
+                                })
+    
+                                if (addressesTo.length > 0) {
+                                    selector(".addressesToSet").style.display = "block";
+                                }
+                                else {
+                                    selector(".addressesToSet").style.display = "none";
+                                }
+                                var x = document.getElementById("addressesToSet");
+                                var str = ""
+                                addressesTo.forEach((adr) => {
+                                    str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
+                                });
+                                x.innerHTML = str;
+                            })
+                            .catch((e) => console.error(e));
+    
+                        // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                        //     method: "GET",
+                        //     mode: "cors",
+                        //     headers: { "Content-Type": "application/json", },
+                        // })
+                        //     .then((res) => res.json())
+                        //     .then((json) => {
+                        //         console.log(json)
+                        //         address_loading = true;
+                        //         addressesTo = json.suggestions.map(item => item).sort();
+    
+                        //         if (addressesTo.length > 0) {
+                        //            selector(".addressesToSet").style.display = "block";
+                        //         }
+                        //         else {
+                        //            selector(".addressesToSet").style.display = "none";
+                        //         }
+                        //         var x = document.getElementById("addressesToSet");
+                        //         var str = ""
+                        //         addressesTo.forEach((adr) => {
+                        //             str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                        //         });
+                        //         x.innerHTML = str;
+                        //     })
+                    } else {
+                        selector(".postcodeTo-error").innerHTML = "";
+                    }
+                }
+            }
+            else {
+                new_addressTo = value;
+            }
+        });
+        function addressesToItemClick(value) {
+            selector(".addressesToSet").style.display = "none";
+            // const id = addressesTo.find(item => item.address == value).id
+    
+            // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+            //     method: "GET",
+            //     mode: "cors",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            //     .then((res) => res.json())
+            //     .then((json) => {
+            //         console.log(json)
+            //         completeAddressTo = json
+            //     })
+            new_addressTo = value;
+            completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
+            selector(".sm-preform__postcodeTo").value = value;
+            showToAddress = true;
+            inputToAddressFlag = false;
+    
+    
+            //var str =selector(".sm-preform__postcodeTo").value.substring(0, toAddressSt) + " , " + value;
+        }
+        selector(".desktop-view").addEventListener("submit", function (e) {
+            e.preventDefault()
+    
+            if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
+                var smfEmail = selector('input[name="smfEmail"]').value;
+                var re = new RegExp(/^.*\//);
+                document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
+                    postcodeTo +
+                    "&smfPrevPostcode=" +
+                    postcodeFrom +
+                    "&smfOutcode=" +
+                    outcode +
+                    "&smfNewAddress=" +
+                    new_addressTo +
+                    "&smfPrevAddress=" +
+                    new_addressFrom +
+                    "&smfEmail=" +
+                    smfEmail;
+            }
+            else if (postcodeTo_error == '' && postcodeFrom_error == '') {
+                var smfEmail = selector('input[name="smfEmail"]').value;
+    
+                let obj = {}
+    
+                obj['email'] = smfEmail
+                obj['moveFromAddress'] = new_addressFrom
+                obj['moveToAddress'] = new_addressTo
+                obj['completeAddressFrom'] = completeAddressFrom
+                obj['completeAddressTo'] = completeAddressTo
+    
+                const objEncode64 = window.btoa(JSON.stringify(obj));
+    
+    
+    
+    
+                if (completeAddressFrom && completeAddressTo) {
+                    console.log(obj)
+                    location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
+                }
+    
+                /* var re = new RegExp(/^.*\//); */
+                /* document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
+                    postcodeTo +
+                    "&smfPrevPostcode=" +
+                    postcodeFrom +
+                    "&smfOutcode=" +
+                    outcode +
+                    "&smfNewAddress=" +
+                    new_addressTo +
+                    "&smfPrevAddress=" +
+                    new_addressFrom +
+                    "&smfEmail=" +
+                    smfEmail; */
+            }
+        })
+        function enterAddressManuallyButtonClick() {
+            enterAddressManuallyMobileButtonClick();
+            selector(".sm-preform-enter-address-manually-button").style.display = "none";
+            selector(".sm-preform-use-address-finder-button").style.display = "block";
+            // Input Postcodes
+            selector('.postcode-inputs').style.display = "flex"
+            selector('.input-postCodeFrom').setAttribute("required", '')
+            selector('.input-postCodeTo').setAttribute("required", '')
+            // Input Postcodes
+            selector(".addressesFromSet").style.display = "none";
+            selector(".addressesToSet").style.display = "none";
+            selector(".postcodeTo-error").style.display = "none";
+            selector(".postcodeFrom-error").style.display = "none";
+            new_addressFrom = selector(".sm-preform__postcodeFrom").value;
+            new_addressTo = selector(".sm-preform__postcodeTo").value;
+    
+            //Input placeholders
+            selector(".sm-preform__postcodeFrom").placeholder = "Enter your previous address";
+            selector(".sm-preform__postcodeTo").placeholder = "Enter your new address";
+    
+            manual_addressTo = true;
+            manual_addressFrom = true;
+        }
+        function useAddressFinderButtonClick() {
+            useAddressFinderMobileButtonClick();
+            selector(".sm-preform-enter-address-manually-button").style.display = "block";
+            selector(".sm-preform-use-address-finder-button").style.display = "none";
+            //Input Postcodes
+            selector('.postcode-inputs').style.display = "none"
+            selector('.input-postCodeFrom').removeAttribute("required")
+            selector('.input-postCodeTo').removeAttribute("required")
+            //Input Postcodes
+            selector(".postcodeFrom-error").style.display = "block";
+            selector(".postcodeTo-error").style.display = "block";
+            selector(".sm-preform__postcodeFrom").value = new_addressFrom;
+            selector(".sm-preform__postcodeTo").value = new_addressTo;
+            
+             //Input placeholders
+            selector(".sm-preform__postcodeFrom").placeholder = "Enter your previous postcode";
+            selector(".sm-preform__postcodeTo").placeholder = "Enter your new postcode";
+            manual_addressFrom = false;
+            manual_addressTo = false;
+    
+            selector(".input-postCodeFrom").value = ""
+            selector(".input-postCodeTo").value = ""
+        }
+    
+        window.onload = init;
+        function init() {
+            selector(".addressesToSet").style.display = "none";
+            selector(".addressesFromSet").style.display = "none";
+            selector(".addressesFromSet-mobile").style.display = "none";
+            selector(".addressesToSet-mobile").style.display = "none";
+    
+            if (postcodeTo != "" && postcodeFrom != "" && new_addressTo != "" && new_addressFrom != "") {
+                postcodeTo_error = '';
+                postcodeFrom_error = '';
+            }
+        }
+    
+        //logic for mobile view
+        selector(".sm-preform__postcodeFrom__mobile").addEventListener("input", function (e) {
+            e.preventDefault();
+            let value = e.target.value;
+            if (manual_addressFrom == false) {
+                selector(".addressesFromSet-mobile").style.display = "none";
+                if (showFromAddress == true) {
+                    selector(".sm-preform__postcodeFrom__mobile").value = value.substring(value.length - 1, value.length);
+                    value1 = value.substring(value.length - 1, value.length);
+                    value = value1;
+                    showFromAddress = false;
+                }
+                if (value.length >= 4) {
+    
+                    if (value != "") {
+    
+                        fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        })
+                            .then((res) => res.json())
+                            .then((json) => {
+                                console.log(json);
+    
+                                address_loading = true;
+                                postcodeFrom = json.postcode
+    
+                                addressesFrom = json.addresses.map((item) => {
+                                    item.postcode = json.postcode
+    
+                                    return item
+                                })
+    
+                                if (addressesFrom.length > 0) {
+                                    selector(".addressesFromSet-mobile").style.display = "block";
+                                }
+                                else {
+                                    selector(".addressesFromSet-mobile").style.display = "none";
+                                }
+                                var x = document.getElementById("addressesFromSet-mobile");
+                                var str = ""
+                                addressesFrom.forEach((adr) => {
+                                    str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromMobileItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
+                                });
+                                x.innerHTML = str;
+                            })
+                            .catch((e) => console.error(e));
+    
+                        // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                        //     method: "GET",
+                        //     mode: "cors",
+                        //     headers: { "Content-Type": "application/json", },
+                        // })
+                        //     .then((res) => res.json())
+                        //     .then((json) => {
+                        //         console.log(json)
+                        //         address_loading = true;
+                        //         addressesFrom = json.suggestions.map(item => item).sort();
+    
+                        //         if (addressesFrom.length > 0) {
+                        //            selector(".addressesFromSet-mobile").style.display = "block"
+                        //         }
+                        //         else {
+                        //            selector(".addressesFromSet-mobile").style.display = "none";
+                        //         }
+                        //         var x = document.getElementById("addressesFromSet-mobile");
+                        //         var str = ""
+                        //         addressesFrom.forEach((adr) => {
+                        //             str = str + ("<div class = \"addressesFromItem\" onclick = \"addressesFromMobileItemClick('" + adr.address + "')\">" + adr.address + "</div>");
+                        //         });
+                        //         x.innerHTML = str;
+                        //     })
+    
+                    } else {
+                        selector(".postcodeFrom-error-mobile").innerHTML = "";
+                    }
+                }
+            }
+            else {
+                new_addressFrom = value;
+            }
+        });
+        function addressesFromMobileItemClick(value) {
+            selector(".addressesFromSet-mobile").style.display = "none";
+            // const id = addressesFrom.find(item => item.address == value).id
+    
+            // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+            //     method: "GET",
+            //     mode: "cors",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            //     .then((res) => res.json())
+            //     .then((json) => {
+            //         console.log(json)
+            //         completeAddressFrom = json
+            //     })
+    
+    
+            //var str =selector(".sm-preform__postcodeFrom__mobile").value.substring(0, fromAddressSt) + " , " + value;
+            new_addressFrom = value
+            completeAddressFrom = addressesFrom.find(item => item.formatted_address.join(' ') == value)
+            selector(".sm-preform__postcodeFrom__mobile").value = value;
+            showFromAddress = true;
+            inputFromAddressFlag = false;
+        }
+        selector(".sm-preform__postcodeTo__mobile").addEventListener("input", function (e) {
+            e.preventDefault();
+            let value = e.target.value;
+            if (manual_addressTo == false) {
+                selector(".addressesToSet-mobile").style.display = "none";
+                if (showToAddress == true) {
+                    selector(".sm-preform__postcodeTo__mobile").value = value.substring(value.length - 1, value.length);
+                    value1 = value.substring(value.length - 1, value.length);
+                    value = value1;
+                    showToAddress = false;
+                }
+    
+                if (value.length >= 4) {
+    
+                    if (value != "") {
+    
+                        fetch(`${backendUrl}/addresses/postcodeLookup?stream=${value}`, {
+                            method: "GET",
+                            mode: "cors",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                        })
+                            .then((res) => res.json())
+                            .then((json) => {
+                                console.log(json);
+    
+                                address_loading = true;
+                                postcodeTo = json.postcode
+    
+                                addressesTo = json.addresses.map((item) => {
+                                    item.postcode = json.postcode
+    
+                                    return item
+                                })
+    
+                                if (addressesTo.length > 0) {
+                                    selector(".addressesToSet-mobile").style.display = "block";
+                                }
+                                else {
+                                    selector(".addressesToSet-mobile").style.display = "none";
+                                }
+                                var x = document.getElementById("addressesToSet-mobile");
+                                var str = ""
+                                addressesTo.forEach((adr) => {
+                                    str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToMobileItemClick('" + adr.formatted_address.join(' ') + "')\">" + adr.formatted_address.join(' ') + "</div>");
+                                });
+                                x.innerHTML = str;
+                            })
+                            .catch((e) => console.error(e));
+    
+                        // fetch(`${backendUrl}/addresses/autoComplete?stream=${value}`, {
+                        //     method: "GET",
+                        //     mode: "cors",
+                        //     headers: { "Content-Type": "application/json", },
+                        // })
+                        //     .then((res) => res.json())
+                        //     .then((json) => {
+                        //         console.log(json)
+                        //         address_loading = true;
+                        //         addressesTo = json.suggestions.map(item => item).sort();
+    
+                        //         if (addressesTo.length > 0) {
+                        //            selector(".addressesToSet-mobile").style.display = "block";
+                        //         }
+                        //         else {
+                        //            selector(".addressesToSet-mobile").style.display = "none";
+                        //         }
+                        //         var x = document.getElementById("addressesToSet-mobile");
+                        //         var str = ""
+                        //         addressesTo.forEach((adr) => {
+                        //             str = str + ("<div class = \"addressesToItem\" onclick = \"addressesToMobileItemClick(" + "'" + adr.address + "'" + ")\">" + adr.address + "</div>");
+                        //         });
+                        //         x.innerHTML = str;
+                        //     })
+                    } else {
+                        selector(".postcodeTo-error-mobile").innerHTML = "";
+                    }
+                }
+            }
+            else {
+                new_addressTo = value;
+            }
+        });
+    
+        function addressesToMobileItemClick(value) {
+            selector(".addressesToSet-mobile").style.display = "none";
+            // const id = addressesTo.find(item => item.address == value).id
+    
+            // fetch(`${backendUrl}/addresses/getFullComplete?stream=${id}`, {
+            //     method: "GET",
+            //     mode: "cors",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            // })
+            //     .then((res) => res.json())
+            //     .then((json) => {
+            //         console.log(json)
+            //         completeAddressTo = json
+            //     })
+    
+            //var str =selector(".sm-preform__postcodeTo__mobile").value.substring(0, toAddressSt) + " , " + value;
+            //selector(".sm-preform__postcodeTo__mobile").value = value;
+            // showToAddress = true;
+            // inputToAddressFlag = false;
+    
+            new_addressTo = value
+            completeAddressTo = addressesTo.find(item => item.formatted_address.join(' ') == value)
+            selector(".sm-preform__postcodeTo__mobile").value = value;
+            showToAddress = true;
+            inputToAddressFlag = false;
+        }
+    
+        selector(".mobile-view").addEventListener("submit", function (e) {
+            e.preventDefault();
+    
+            if (manual_addressFrom == true && new_addressFrom != '' && new_addressTo != '' && postcodeTo != '' && postcodeFrom != '') {
+                var smfEmail = selector('input[name="smfEmailMobile"]').value;
+                var re = new RegExp(/^.*\//);
+                document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
+                    postcodeTo +
+                    "&smfPrevPostcode=" +
+                    postcodeFrom +
+                    "&smfOutcode=" +
+                    outcode +
+                    "&smfNewAddress=" +
+                    new_addressTo +
+                    "&smfPrevAddress=" +
+                    new_addressFrom +
+                    "&smfEmail=" +
+                    smfEmail;
+            }
+            else if (postcodeTo_error == '' && postcodeFrom_error == '') {
+                var smfEmail = selector('input[name="smfEmailMobile"]').value;
+    
+                let obj = {}
+    
+                obj['email'] = smfEmail
+                obj['moveFromAddress'] = new_addressFrom
+                obj['moveToAddress'] = new_addressTo
+                obj['completeAddressFrom'] = completeAddressFrom
+                obj['completeAddressTo'] = completeAddressTo
+    
+                const objEncode64 = window.btoa(JSON.stringify(obj));
+    
+                if (completeAddressFrom && completeAddressTo) {
+                    console.log(obj)
+                    location.href = `https://form.slothmove.com/?completePre=${objEncode64}`
+                }
+    
+                /*var re = new RegExp(/^.*\//);
+                 document.location.href = "https://form.slothmove.com/?smfNewPostcode=" +
+                    postcodeTo +
+                    "&smfPrevPostcode=" +
+                    postcodeFrom +
+                    "&smfOutcode=" +
+                    outcode +
+                    "&smfNewAddress=" +
+                    new_addressTo +
+                    "&smfPrevAddress=" +
+                    new_addressFrom +
+                    "&smfEmail=" +
+                    smfEmail; */
+    
+            }
+        })
+        function enterAddressManuallyMobileButtonClick() {
+            selector(".sm-preform-enter-address-manually-button-mobile").style.display = "none";
+            selector(".sm-preform-use-address-finder-button-mobile").style.display = "block";
+            // Input Postcodes
+            selector('.postcode-inputs-mobile').style.display = "block"
+            selector('.input-postCodeFrom-mobile').setAttribute("required", '')
+            selector('.input-postCodeTo-mobile').setAttribute("required", '')
+            // Input Postcodes
+            selector(".addressesFromSet-mobile").style.display = "none";
+            selector(".addressesToSet-mobile").style.display = "none";
+            selector(".postcodeTo-error-mobile").style.display = "none";
+            selector(".postcodeFrom-error-mobile").style.display = "none";
+            new_addressFrom = selector(".sm-preform__postcodeFrom__mobile").value;
+            new_addressTo = selector(".sm-preform__postcodeTo__mobile").value;
+    
+            //Input placeholders
+            selector(".sm-preform__postcodeFrom__mobile").placeholder = "Enter your previous address";
+            selector(".sm-preform__postcodeTo__mobile").placeholder = "Enter your new address";
+    
+            manual_addressTo = true;
+            manual_addressFrom = true;
+    
+            selector(".sm-preform-enter-address-manually-button").style.display = "none";
+            selector(".sm-preform-use-address-finder-button").style.display = "block";
+            selector(".addressesFromSet").style.display = "none";
+            selector(".addressesToSet").style.display = "none";
+            selector(".postcodeTo-error").style.display = "none";
+            selector(".postcodeFrom-error").style.display = "none";
+        }
+        function useAddressFinderMobileButtonClick() {
+            selector(".sm-preform-enter-address-manually-button-mobile").style.display = "block";
+            selector(".sm-preform-use-address-finder-button-mobile").style.display = "none";
+            //Input Postcodes
+            selector('.postcode-inputs-mobile').style.display = "none"
+            selector('.input-postCodeFrom-mobile').removeAttribute("required")
+            selector('.input-postCodeTo-mobile').removeAttribute("required")
+            //Input Postcodes
+            selector(".postcodeFrom-error-mobile").style.display = "block";
+            selector(".postcodeTo-error-mobile").style.display = "block";
+            selector(".sm-preform__postcodeFrom__mobile").value = new_addressFrom;
+            selector(".sm-preform__postcodeTo__mobile").value = new_addressTo;
+    
+            //Input placeholders
+            selector(".sm-preform__postcodeFrom__mobile").placeholder = "Enter your previous postcode";
+            selector(".sm-preform__postcodeTo__mobile").placeholder = "Enter your new postcode";
+    
+            manual_addressFrom = false;
+            manual_addressTo = false;
+    
+            selector(".sm-preform-enter-address-manually-button").style.display = "block";
+            selector(".sm-preform-use-address-finder-button").style.display = "none";
+            selector(".postcodeTo-error").style.display = "block";
+            selector(".postcodeFrom-error").style.display = "block";
+    
+            selector(".input-postCodeFrom-mobile").value = ""
+            selector(".input-postCodeTo-mobile").value = ""
+        }
+    </script>
+    
+    <style>
+        * {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .preform-instance .formDiv {
+            color: #05547d;
+            font-size: 15px;
+            margin-top: 10px;
+            text-align: right;
+            width: calc(100% + 13px);
+        }
+    
+        .preform-instance .no-results {
+            color: #05547d;
+        }
+    
+        .preform-instance .formSwitch {
+            cursor: pointer;
+        }
+    
+        .preform-instance .manualAddress {
+            display: none;
+        }
+    
+        .preform-instance .error {
+            margin-top: 5px;
+            color: red;
+            font-size: 13px;
+            margin-bottom: 0;
+        }
+
+    
+        .preform-instance .sm-preform {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            font-family: "Montserrat", sans-serif !important;
+            min-height: 350px;
+            background: #fff;
+            width: 940px;
+            padding: 8px 15px 15px;
+            font-family: 'montserat';
+            font-size: 16px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 6px rgb(0 0 0 / 40%);
+        }
+    
+        .preform-instance .sm-preform__label {
+            color: #21739e;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 700;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+    
+        .preform-instance .sm-preform__input {
+            padding: 10px 13px;
+            font-family: Montserrat, sans-serif !important;
+            font-size: 17px;
+            margin: 0;
+            height: 54px;
+            border: 2px solid #949494 !important;
+            color: #131313 !important;
+            border-radius: 5px;
+            padding-left: 15px;
+            outline: none;
+        }
+    
+        .preform-instance .sm-preform_checkbox {
+            padding-top: 10px;
+            padding-bottom: 20px;
+        }
+    
+        .preform-instance .sm-preform__submit {
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
+            border: 0;
+            border-radius: 5px;
+            background: #035e57;
+            transition: all 0.25s ease;
+            font-size: 16px;
+            height: 54px;
+            width: 246px;
+            margin-top:1%;
+        }
+    
+        .preform-instance .sm-preform__submit:hover {
+            background-color: #E13030;
+        }
+    
+        .preform-instance .sm-preform__check {
+            display: inline;
+            margin-right: 2px;
+            cursor: pointer;
+        }
+    
+        .preform-instance .sm-preform__check-lbl {
+            line-height: 1;
+            font-size: 0.75em;
+            display: inline;
+        }
+    
+        .sm-preform__error {
+            color: red;
+            margin-top: 15px;
+            display: none;
+        }
+    
+        .sm-addressesTo {
+            display: none;
+            flex-direction: column;
+        }
+    
+        .sm-addressesFrom {
+            display: none;
+            flex-direction: column;
+        }
+    
+        .preform-instance .suppliers-loading-pre {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .preform-instance .suppliers-loading-pre p {
+            margin-top: 30px;
+        }
+    
+        .preform-instance .smf-logo-spinner-pre {
+            height: 50px;
+            object-fit: contain;
+            margin-top: -70px;
+        }
+    
+        .preform-instance .automatic_find {
+            font-weight: 700;
+            cursor: pointer;
+            color: #18a8d6;
+        }
+    
+        .preform-instance .manual_switchTo {
+            cursor: pointer;
+            margin-left: auto;
+            color: #21739e;
+            margin-top: 10px;
+        }
+    
+        .preform-instance .manual_switchFrom {
+            cursor: pointer;
+            margin-left: auto;
+            color: #21739e;
+            margin-top: 10px;
+        }
+    
+        .preform-instance .manual_divTo {
+            display: none;
+        }
+    
+        .preform-instance .manual_divFrom {
+            display: none;
+        }
+    
+        .preform-instance .sm-preform-left {
+            width: 60%;
+            margin-left:2%;
+        }
+    
+        .preform-instance .sm-preform-left-title {
+            font-size: 25px;
+            font-weight: 500;
+            line-height: 1.3;
+            padding-top: 15px;
+            padding-right: 55px;
+        }
+    
+        .preform-instance .sm-preform-left-content {
+            padding-top: 5px;
+            font-size: 18px;
+            color: #545454;
+        }
+    
+        .preform-instance .sm-preform-left-inputs {
+            display: flex;
+            /* justify-content: space-between; */
+            margin-top: 15px;
+        }
+    
+        .preform-instance .sm-preform-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* padding-left: 25px; */
+        }
+    
+        .preform-instance .sm-preform-input-email-padding {
+            margin-top: 15px;
+        }
+    
+        .preform-instance .sm-preform-input-email-width {
+            width: 95%;
+        }
+    
+        .preform-instance .sm-preform-input-postcode-width {
+            width: 246px;
+        }
+    
+        .preform-instance .sm-preform-left-buttons {
+            margin-top: 10px;
+            /* margin-bottom: 10px; */
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .preform-instance .sm-preform-left-buttons-trustpilot {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .preform-instance .sm-preform-left-buttons-trustpilot-content {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+        }
+    
+        .preform-instance .sm-preform-left-buttons-trustpilot-icon {
+            margin-bottom: 4px;
+        }
+    
+        .preform-instance .sm-preform-address-set {
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        .preform-instance .sm-preform-enter-address-manually-part {
+            display: flex;
+            justify-content: end;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    
+        .preform-instance .sm-preform-enter-address-manually-button {
+            display: block;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
+        .preform-instance .sm-preform-use-address-finder-button {
+            display: none;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
+
+        .preform-instance .addressesFromSet {
+            margin-top: -5px;
+            cursor: pointer;
+            color: #545454;
+            position: absolute;
+            background: white;
+            width: 237px;
+            line-height: 1.25;
+            padding-left: 13px;
+            font-size: 14px;
+            height: 135px;
+            overflow: hidden;
+            overflow-y: scroll;
+            border: 2px solid #d4d4d4;
+            border-radius: 5px;
+        }
+    
+        .preform-instance .addressesFromItem {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    
+        .preform-instance .addressesFromItem:hover {
+            color: black;
+        }
+    
+        .preform-instance .addressesToSet {
+            margin-top: -5px;
+            cursor: pointer;
+            color: #545454;
+            position: absolute;
+            background: white;
+            width: 237px;
+            line-height: 1.25;
+            margin-left: 251px;
+            padding-left: 13px;
+            font-size: 14px;
+            height: 135px;
+            overflow: hidden;
+            overflow-y: scroll;
+            border: 2px solid #d4d4d4;
+            border-radius: 5px;
+        }
+    
+        .preform-instance .addressesToItem {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    
+        .preform-instance .addressesToItem:hover {
+            color: black;
+        }
+    
+        @media only screen and (min-width: 1000px) {
+            .preform-instance .desktop-view {
+                display: block;
+            }
+    
+            .preform-instance .mobile-view {
+                display: none;
+            }
+        }
+    
+        @media only screen and (max-width: 1000px) {
+            .preform-instance .desktop-view {
+                display: none;
+            }
+    
+            .preform-instance .mobile-view {
+                display: block;
+            }
+        }
+    
+        .preform-instance .sm-preform-mobile {
+            margin: 0 auto;
+            font-family: "Montserrat", sans-serif !important;
+            min-height: 820px;
+            background: #fff;
+            width: 350px;
+            padding: 5px 30px 20px;
+            font-family: 'montserat';
+            font-size: 16px;
+            border-radius: 15px;
+            box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            padding-bottom: 0px;
+        }
+    
+        .preform-instance .sm-preform-mobile-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .preform-instance .sm-preform-mobile-title {
+            width: 98%;
+            margin-left: 10px;
+            font-size: 24px;
+            font-weight: 500;
+        }
+    
+        .preform-instance .sm-preform-mobile-content {
+            width: 98%;
+            margin-left: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            color: #545454;
+        }
+    
+        .preform-instance .sm-preform-mobile-input {
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+    
+        .preform-instance .sm-preform-mobile-email-input-width {
+            width: 98%;
+        }
+    
+        .preform-instance .addressesFromSet-mobile {
+            margin-left: 10px;
+            margin-top: -5px;
+            cursor: pointer;
+            color: #545454;
+            position: absolute;
+            background: white;
+            width: 275px;
+            line-height: 1.25;
+            padding-left: 13px;
+            font-size: 14px;
+            height: 135px;
+            overflow: hidden;
+            overflow-y: scroll;
+            border: 2px solid #d4d4d4;
+            border-radius: 5px;
+            z-index: 10;
+        }
+    
+        .preform-instance .addressesToSet-mobile {
+            margin-left: 10px;
+            margin-top: -5px;
+            cursor: pointer;
+            color: #545454;
+            position: absolute;
+            background: white;
+            width: 275px;
+            line-height: 1.25;
+            padding-left: 13px;
+            font-size: 14px;
+            height: 135px;
+            overflow: hidden;
+            overflow-y: scroll;
+            border: 2px solid #d4d4d4;
+            border-radius: 5px;
+        }
+    
+        .preform-instance .sm-preform__submit-mobile {
+            margin-left: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 0.5px;
+            border: 0;
+            border-radius: 5px;
+            background: #035e57;
+            transition: all 0.25s ease;
+            font-size: 18px;
+            height: 54px;
+            width: 275px;
+        }
+    
+        .preform-instance .sm-preform__submit-mobile:hover {
+            background-color: #E13030;
+        }
+    
+        .preform-instance .sm-preform-trustpilot-mobile {
+            margin-top: 20px;
+            padding-bottom: 25px;
+            display: flex;
+            justify-content: center;
+        }
+    
+        .preform-instance .sm-preform-trustpilot-mobile-width {
+            width: 50%;
+        }
+    
+        .preform-instance .sm-preform-left-buttons-trustpilot-content-mobile {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: #545454;
+        }
+    
+        .preform-instance .sm-preform-enter-address-manually-part-mobile {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    
+        .preform-instance .sm-preform-enter-address-manually-button-mobile {
+            margin-left: 115px;
+            display: block;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
+        .preform-instance .sm-preform-use-address-finder-button-mobile {
+            margin-left: 148px;
+            display: none;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
+        .preform-instance .postcode-inputs {
+            display: none;
+        }
+    
+        .preform-instance .postcode-inputs-mobile {
+            display: none;
+            margin-left: 10px;
+            margin-top: 15px;
+        }
+
+        .mobile-view .sm-preform-mobile:hover{
+            background-color: blue;
+        }
+
+    </style>
+</div>
