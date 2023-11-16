@@ -230,6 +230,8 @@
           moveFromAddress: "",
           moveToPostCode: "",
           moveToAddress: "",
+          completeAddressFrom: null,
+          completeAddressTo: null,
           errorEmail: null,
           errorFinderFrom: null,
           errorFinderTo: null,
@@ -269,7 +271,7 @@
           return regex.test(postcode);
         },
 
-        initChoiceSelector: function (id, postcodeType, moveType) {
+        initChoiceSelector: function (id, postcodeType, moveType, completeAddress) {
           let element = document.querySelector(id);
 
           let choices = new Choices(element, {
@@ -322,8 +324,9 @@
           });
 
           element.addEventListener("choice", (event) => {
-            console.log(event.detail.choice["label"]);
+            console.log(event.detail.choice);
             this[moveType] = event.detail.choice["label"];
+            this[completeAddress] = event.detail.choice["value"];
           });
 
           element.addEventListener("removeItem", (event) => {
@@ -373,41 +376,74 @@
 
           this.validatingInputs();
 
-          if (
-            this.errorEmail == false &&
-            ((!this.manualInput && this.errorFinderFrom == false && this.errorFinderTo == false) ||
-              (this.manualInput &&
-                this.errorPostcodeFrom == false &&
-                this.errorPostcodeTo == false))
-          ) {
-            console.log({
+          if (this.errorEmail == false) {
+
+            let dataDebug = {
               email: this.email,
               moveFromPostCode: this.moveFromPostCode,
               moveFromAddress: this.moveFromAddress,
               moveToPostCode: this.moveToPostCode,
               moveToAddress: this.moveToAddress,
-            });
+              completeAddressFrom: this.completeAddressFrom,
+              completeAddressTo: this.completeAddressTo,
+            };
 
-            // return;
+            if (!this.manualInput && this.errorFinderFrom == false && this.errorFinderTo == false) {
+              let obj = {};
 
-            // Redirection to Form
-            document.location.href =
-              "https://form.slothmove.com/?smfNewPostcode=" +
-              this.moveToPostCode +
-              "&smfPrevPostcode=" +
-              this.moveFromPostCode +
-              "&smfNewAddress=" +
-              this.moveToAddress +
-              "&smfPrevAddress=" +
-              this.moveFromAddress +
-              "&smfEmail=" +
-              this.email;
+              obj["email"] = this.email;
+              obj["moveFromAddress"] = this.moveFromAddress;
+              obj["moveToAddress"] = this.moveToAddress;
+
+              obj["completeAddressFrom"] = this.completeAddressFrom;
+              obj["completeAddressTo"] = this.completeAddressTo;
+
+              const objEncode64 = window.btoa(JSON.stringify(obj));
+
+              console.log(dataDebug)
+
+              // console.log(obj);
+              // return
+              // Redirection to Form
+              location.href = `https://form.slothmove.com/?completePre=${objEncode64}`;
+            }
+
+            if (
+              this.manualInput &&
+              this.errorPostcodeFrom == false &&
+              this.errorPostcodeTo == false
+            ) {
+
+              console.log(dataDebug)
+              // Redirection to Form
+              document.location.href =
+                "https://form.slothmove.com/?smfNewPostcode=" +
+                this.moveToPostCode +
+                "&smfPrevPostcode=" +
+                this.moveFromPostCode +
+                "&smfNewAddress=" +
+                this.moveToAddress +
+                "&smfPrevAddress=" +
+                this.moveFromAddress +
+                "&smfEmail=" +
+                this.email;
+            }
           }
         },
       },
       mounted() {
-        this.initChoiceSelector("#choices", "moveFromPostCode", "moveFromAddress");
-        this.initChoiceSelector("#choices2", "moveToPostCode", "moveToAddress");
+        this.initChoiceSelector(
+          "#choices",
+          "moveFromPostCode",
+          "moveFromAddress",
+          "completeAddressFrom"
+        );
+        this.initChoiceSelector(
+          "#choices2",
+          "moveToPostCode",
+          "moveToAddress",
+          "completeAddressTo"
+        );
 
         const adjustSizeDetail = () => {
           let resizeObserver = new ResizeObserver((entries) => {
@@ -493,11 +529,12 @@
       border-radius: 30px;
       background-size: 200% 200%;
       background-image: linear-gradient(
-        60deg,
-        #ec0677,
-        #4f3aff,
-        #ec0677,
-        #4f3aff,
+        240deg,
+        #ffe859,
+        #ffe859,
+        #23a9d7,
+        #1f476f,
+        #ff7f11,
         #ec0677,
         #ec0677
       );
@@ -565,12 +602,14 @@
       margin-bottom: 5px;
     }
 
-    /* #preform .choices__list--dropdown,
-    #preform .choices__list--dropdown .choices__list,
-    #preform .choices__list--dropdown .is-active,
-    #preform .choices__list[aria-expanded] .choices__list {
-        z-index: 1;
-    } */
+    #preform .choices__list--dropdown {
+      top: 0% !important;
+    }
+
+    #preform .is-flipped .choices__list--dropdown {
+      bottom: 0% !important;
+      top: auto !important;
+    }
 
     #preform .choices,
     #preform .choices__list,
