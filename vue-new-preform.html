@@ -377,7 +377,6 @@
           this.validatingInputs();
 
           if (this.errorEmail == false) {
-
             let dataDebug = {
               email: this.email,
               moveFromPostCode: this.moveFromPostCode,
@@ -400,7 +399,7 @@
 
               const objEncode64 = window.btoa(JSON.stringify(obj));
 
-              console.log(dataDebug)
+              console.log(dataDebug);
 
               // console.log(obj);
               // return
@@ -413,8 +412,7 @@
               this.errorPostcodeFrom == false &&
               this.errorPostcodeTo == false
             ) {
-
-              console.log(dataDebug)
+              console.log(dataDebug);
               // Redirection to Form
               document.location.href =
                 "https://form.slothmove.com/?smfNewPostcode=" +
@@ -527,29 +525,42 @@
       max-width: 520px;
       height: 440px;
       border-radius: 30px;
-      background-size: 200% 200%;
-      background-image: linear-gradient(
-        240deg,
-        #ffe859,
-        #ffe859,
-        #23a9d7,
-        #1f476f,
-        #ff7f11,
-        #ec0677,
-        #ec0677
-      );
-      animation: gradient 5s ease-in-out infinite;
+      background: linear-gradient(270deg, #ffe859, #23a9d7, #1f476f, #ff7f11, #ec0677);
+      background-size: 1000% 1000%;
+      -webkit-animation: gradient 30s ease infinite;
+      -moz-animation: gradient 30s ease infinite;
+      animation: gradient 30s ease infinite;
     }
 
+    @-webkit-keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    @-moz-keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
     @keyframes gradient {
       0% {
         background-position: 0% 50%;
       }
-
       50% {
         background-position: 100% 50%;
       }
-
       100% {
         background-position: 0% 50%;
       }
