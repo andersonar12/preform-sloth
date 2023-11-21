@@ -32,13 +32,18 @@
         <div class="position-relative">
           <div class="container-sloth w-100">
             <div class="icon">
-              <img :src="urlBucket + '/pre-form/sloth.png'" width="136px" class="" />
+              <img :src="urlBucket + '/pre-form/sloth.png'" width="136px" height="136px" class="" />
             </div>
           </div>
         </div>
         <form class="form-content" @submit.prevent="handleSubmit">
           <div class="text-center mb-4">
-            <img :src="urlBucket + '/pre-form/slothmove-title-logo.png'" width="230px" class="" />
+            <img
+              :src="urlBucket + '/pre-form/slothmove-title-logo.png'"
+              width="230px"
+              height="40px"
+              class=""
+            />
           </div>
 
           <h3 class="fw-bold text-white text-center mb-4">
@@ -64,7 +69,12 @@
           <div class="question" v-show="!manualInput">
             <div class="d-flex align-items-end" style="margin-bottom: 8px">
               <h6 class="fw-bold text-white mb-0">I'm moving from</h6>
-              <img :src="urlBucket + '/pre-form/new-pin-red.png'" class="ms-2" width="13px" />
+              <img
+                :src="urlBucket + '/pre-form/new-pin-red.png'"
+                class="ms-2"
+                width="13px"
+                height="21px"
+              />
             </div>
             <select id="choices" select-one>
               <option value="" disabled selected hidden>Your previous postcode</option>
@@ -80,6 +90,7 @@
                 style="filter: hue-rotate(200deg)"
                 class="ms-2"
                 width="13px"
+                height="21px"
               />
             </div>
             <select id="choices2" class="choices-custom" select-one>
@@ -163,7 +174,9 @@
               <img
                 :src="urlBucket +'/pre-form/shield.png'"
                 class="mb-1 img-fluid"
-                style="max-width: 35px; max-height: 32.5px"
+                width="27px"
+                height="32.5px"
+                style="max-height: 32.5px"
               />
               <h6 class="fw-bolder mb-1">SECURE</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">SSL ENCRYPTION</p>
@@ -172,7 +185,9 @@
               <img
                 :src="urlBucket +'/pre-form/shield-2.png'"
                 class="mb-1 img-fluid"
-                style="max-width: 35px; max-height: 32.5px"
+                width="28px"
+                height="32.5px"
+                style="max-height: 32.5px"
               />
               <h6 class="fw-bolder mb-1">ICO</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">REF: ZA531326</p>
@@ -181,7 +196,9 @@
               <img
                 :src="urlBucket +'/pre-form/lock.png'"
                 class="mb-1 img-fluid"
-                style="max-width: 35px; max-height: 32.5px"
+                width="25px"
+                height="32.5px"
+                style="max-height: 32.5px"
               />
               <h6 class="fw-bolder mb-1">GDPR</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">COMPLIANT</p>
@@ -190,25 +207,13 @@
               <img
                 :src="urlBucket + '/pre-form/bag.png'"
                 class="mb-1 img-fluid"
-                style="max-width: 35px; max-height: 32.5px"
+                width="35px"
+                height="32.5px"
+                style="max-height: 32.5px"
               />
               <h6 class="fw-bolder mb-1">500+</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">ORGANISATIONS</p>
             </div>
-            <!-- <div
-              class="col px-1 text-center"
-              style="color: white; max-width: 105px"
-              v-for="(feature, index) in features"
-              :key="index"
-            >
-              <img
-                :src="urlBucket + feature.icon"
-                class="mb-1 img-fluid"
-                style="max-width: 35px; max-height: 32.5px"
-              />
-              <h6 class="fw-bolder mb-1">{{ feature.title }}</h6>
-              <p class="fw-bolder mb-0" style="font-size: 8px">{{ feature.sub }}</p>
-            </div> -->
           </div>
         </form>
       </div>
@@ -510,15 +515,6 @@
       width: 97%;
       min-height: 160px;
     }
-
-    /*.gradient {
-      position: relative;
-      max-width: 520px;
-      height: 440px;
-      border-radius: 30px;
-      background: linear-gradient(90deg, #ec0677 0%, #4f3aff 65%, #4f3aff 100%);
-      animation: gradient 10s ease infinite;
-    }*/
 
     .gradient {
       position: relative;
