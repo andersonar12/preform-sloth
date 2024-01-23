@@ -1,16 +1,25 @@
 <div>
   <!-- Tools and dependencies -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700, 800&amp;display=swap"
-    rel="stylesheet" />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700, 800&amp;display=swap"
+    rel="stylesheet"
+  />
 
   <!-- Vue.js Library -->
   <script src="https://unpkg.com/vue@2.6.12"></script>
 
   <!-- Select tool -->
   <!-- Include Choices CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+  />
   <!-- Include Choices JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
   <!-- Select tool -->
@@ -29,7 +38,12 @@
         </div>
         <form class="form-content" @submit.prevent="handleSubmit">
           <div class="text-center mb-4">
-            <img :src="urlBucket + '/pre-form/slothmove-title-logo.png'" width="230px" height="40px" class="" />
+            <img
+              :src="urlBucket + '/pre-form/slothmove-title-logo.png'"
+              width="230px"
+              height="40px"
+              class=""
+            />
           </div>
 
           <h3 class="fw-bold text-white text-center mb-4">
@@ -39,8 +53,14 @@
           <div class="question">
             <h6 class="fw-bold text-white">Email</h6>
             <div class="d-flex">
-              <input type="email" placeholder="e.g Alexander@outlook.com" class="email-input p-3 ps-4 w-100"
-                v-model="email" required style="font-family: 'Montserrat', sans-serif !important" />
+              <input
+                type="email"
+                placeholder="e.g Alexander@outlook.com"
+                class="email-input p-3 ps-4 w-100"
+                v-model="email"
+                required
+                style="font-family: 'Montserrat', sans-serif !important"
+              />
             </div>
             <p class="error-msg" v-show="errorEmail">* Enter a valid email address</p>
           </div>
@@ -49,7 +69,12 @@
           <div class="question" v-show="!manualInput">
             <div class="d-flex align-items-end" style="margin-bottom: 8px">
               <h6 class="fw-bold text-white mb-0">I'm moving from</h6>
-              <img :src="urlBucket + '/pre-form/new-pin-red.png'" class="ms-2" width="13px" height="21px" />
+              <img
+                :src="urlBucket + '/pre-form/new-pin-red.png'"
+                class="ms-2"
+                width="13px"
+                height="21px"
+              />
             </div>
             <select id="choices" select-one>
               <option value="" disabled selected hidden>Your previous postcode</option>
@@ -60,8 +85,13 @@
           <div class="question" v-show="!manualInput">
             <div class="d-flex align-items-end" style="margin-bottom: 8px">
               <h6 class="fw-bold text-white mb-0">I'm moving to</h6>
-              <img :src="urlBucket + '/pre-form/new-pin-red.png'" style="filter: hue-rotate(200deg)" class="ms-2"
-                width="13px" height="21px" />
+              <img
+                :src="urlBucket + '/pre-form/new-pin-red.png'"
+                style="filter: hue-rotate(200deg)"
+                class="ms-2"
+                width="13px"
+                height="21px"
+              />
             </div>
             <select id="choices2" class="choices-custom" select-one>
               <option value="" disabled selected hidden>Your new postcode</option>
@@ -74,8 +104,14 @@
             <div class="question">
               <h6 class="fw-bold text-white">Previous Postcode</h6>
               <div class="d-flex">
-                <input type="text" placeholder="e.g WC2N 5DU" class="p-3 ps-4 w-100" v-model="moveFromPostCode"
-                  :required="manualInput" style="font-family: 'Montserrat', sans-serif !important" />
+                <input
+                  type="text"
+                  placeholder="e.g WC2N 5DU"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveFromPostCode"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
               </div>
               <p class="error-msg" v-show="errorPostcodeFrom">* Invalid Postcode</p>
             </div>
@@ -83,17 +119,28 @@
             <div class="question">
               <h6 class="fw-bold text-white">Previous Address</h6>
               <div class="d-flex">
-                <input type="text" placeholder="e.g 9 Diamonf Avenue..." class="p-3 ps-4 w-100"
-                  v-model="moveFromAddress" :required="manualInput"
-                  style="font-family: 'Montserrat', sans-serif !important" />
+                <input
+                  type="text"
+                  placeholder="e.g 9 Diamonf Avenue..."
+                  class="p-3 ps-4 w-100"
+                  v-model="moveFromAddress"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
               </div>
             </div>
 
             <div class="question">
               <h6 class="fw-bold text-white">New Postcode</h6>
               <div class="d-flex">
-                <input type="text" placeholder="e.g WC2N 5DU" class="p-3 ps-4 w-100" v-model="moveToPostCode"
-                  :required="manualInput" style="font-family: 'Montserrat', sans-serif !important" />
+                <input
+                  type="text"
+                  placeholder="e.g WC2N 5DU"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveToPostCode"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
               </div>
               <p class="error-msg" v-show="errorPostcodeTo">* Invalid Postcode</p>
             </div>
@@ -101,40 +148,69 @@
             <div class="question">
               <h6 class="fw-bold text-white">New Address</h6>
               <div class="d-flex">
-                <input type="text" placeholder="e.g 33 Rosemary Road" class="p-3 ps-4 w-100" v-model="moveToAddress"
-                  :required="manualInput" style="font-family: 'Montserrat', sans-serif !important" />
+                <input
+                  type="text"
+                  placeholder="e.g 33 Rosemary Road"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveToAddress"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
               </div>
             </div>
           </div>
 
-          <p class="text-white text-end text-decoration-underline mb-4" style="cursor: pointer; font-size: 11.5px"
-            @click="manualInput = !manualInput">
+          <p
+            class="text-white text-end text-decoration-underline mb-4"
+            style="cursor: pointer; font-size: 11.5px"
+            @click="toggleManualInput()"
+          >
             {{ manualInput ? 'Use address finder' : 'Enter address manually' }}
           </p>
           <button class="submit mb-4" role="button">Update my address</button>
 
           <div class="features row d-flex justify-content-center">
             <div class="col px-1 text-center" style="color: white; max-width: 105px">
-              <img :src="urlBucket +'/pre-form/shield.png'" class="mb-1 img-fluid" width="27px" height="32.5px"
-                style="max-height: 32.5px" />
+              <img
+                :src="urlBucket +'/pre-form/shield.png'"
+                class="mb-1 img-fluid"
+                width="27px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
               <h6 class="fw-bolder mb-1">SECURE</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">SSL ENCRYPTION</p>
             </div>
             <div class="col px-1 text-center" style="color: white; max-width: 105px">
-              <img :src="urlBucket +'/pre-form/shield-2.png'" class="mb-1 img-fluid" width="28px" height="32.5px"
-                style="max-height: 32.5px" />
+              <img
+                :src="urlBucket +'/pre-form/shield-2.png'"
+                class="mb-1 img-fluid"
+                width="28px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
               <h6 class="fw-bolder mb-1">ICO</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">REF: ZA531326</p>
             </div>
             <div class="col px-1 text-center" style="color: white; max-width: 105px">
-              <img :src="urlBucket +'/pre-form/lock.png'" class="mb-1 img-fluid" width="25px" height="32.5px"
-                style="max-height: 32.5px" />
+              <img
+                :src="urlBucket +'/pre-form/lock.png'"
+                class="mb-1 img-fluid"
+                width="25px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
               <h6 class="fw-bolder mb-1">GDPR</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">COMPLIANT</p>
             </div>
             <div class="col px-1 text-center" style="color: white; max-width: 105px">
-              <img :src="urlBucket + '/pre-form/bag.png'" class="mb-1 img-fluid" width="35px" height="32.5px"
-                style="max-height: 32.5px" />
+              <img
+                :src="urlBucket + '/pre-form/bag.png'"
+                class="mb-1 img-fluid"
+                width="35px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
               <h6 class="fw-bolder mb-1">500+</h6>
               <p class="fw-bolder mb-0" style="font-size: 8px">ORGANISATIONS</p>
             </div>
@@ -191,6 +267,15 @@
         };
       },
       methods: {
+        toggleManualInput: function () {
+          if (this.manualInput) {
+            this.moveFromPostCode = "";
+            this.moveToPostCode = "";
+            this.moveFromAddress = "";
+            this.moveToAddress = "";
+          }
+          this.manualInput = !this.manualInput;
+        },
         regexEmail: function (email) {
           const regexMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
           return regexMail.test(email);
