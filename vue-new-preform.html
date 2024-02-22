@@ -65,6 +65,23 @@
             <p class="error-msg" v-show="errorEmail">* Enter a valid email address</p>
           </div>
 
+          <div class="question confirm-email" v-show="showConfirmYourEmailInput">
+            <h6 class="fw-bold text-white">Confirm your Email</h6>
+            <div class="d-flex">
+              <input
+                type="email"
+                placeholder="e.g Alexander@outlook.com"
+                class="email-input p-3 ps-4 w-100"
+                v-model="confirmYourEmail"
+                required
+                style="font-family: 'Montserrat', sans-serif !important"
+              />
+            </div>
+            <p class="error-msg" v-show="errorConfirmYourEmail">
+              * The email addresses introduced don’t match
+            </p>
+          </div>
+
           <!-- Address Finders -->
           <div class="question" v-show="!manualInput">
             <div class="d-flex align-items-end" style="margin-bottom: 8px">
@@ -230,7 +247,9 @@
           urlBucket: "https://drmig4hxr8n3m.cloudfront.net",
           search: "",
           manualInput: false,
+          showConfirmYourEmailInput: false,
           email: "",
+          confirmYourEmail: "",
           moveFromPostCode: "",
           moveFromAddress: "",
           moveToPostCode: "",
@@ -238,6 +257,7 @@
           completeAddressFrom: null,
           completeAddressTo: null,
           errorEmail: null,
+          errorConfirmYourEmail: null,
           errorFinderFrom: null,
           errorFinderTo: null,
           errorPostcodeFrom: false,
@@ -361,6 +381,12 @@
             this.errorEmail = true;
           }
 
+          if (this.email == this.confirmYourEmail) {
+            this.errorConfirmYourEmail = false;
+          } else {
+            this.errorConfirmYourEmail = true;
+          }
+
           if (this.moveFromAddress.length > 0) {
             this.errorFinderFrom = false;
           } else {
@@ -390,7 +416,7 @@
 
           this.validatingInputs();
 
-          if (this.errorEmail == false) {
+          if (this.errorEmail == false && this.confirmYourEmail == this.email) {
             let dataDebug = {
               email: this.email,
               moveFromPostCode: this.moveFromPostCode,
@@ -473,7 +499,11 @@
       },
       watch: {
         email(value) {
-          //   console.log(value);
+          if (this.regexEmail(value)) {
+            this.showConfirmYourEmailInput = true;
+          } else {
+            this.showConfirmYourEmailInput = false;
+          }
         },
       },
     });
@@ -604,6 +634,19 @@
         left: 5px;
         top: -105px;
       }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    #preform .confirm-email {
+      animation: fadeIn 1s;
     }
 
     #preform input {
