@@ -1,0 +1,820 @@
+<div>
+  <!-- New Preform with Tiktok Flow -->
+  <!-- Tools and dependencies -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous"
+  />
+  <link
+    href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700, 800&amp;display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Vue.js Library -->
+  <script src="https://unpkg.com/vue@2.6.12"></script>
+
+  <!-- Select tool -->
+  <!-- Include Choices CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"
+  />
+  <!-- Include Choices JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+  <!-- Select tool -->
+
+  <!-- HTML - Render -->
+  <div class="main">
+    <div class="gradient container-fluid">
+      <div id="preform">
+        <!-- Logo Sloth -->
+        <div class="position-relative">
+          <div class="container-sloth w-100">
+            <div class="icon">
+              <img :src="urlBucket + '/pre-form/sloth.png'" width="136px" height="136px" class="" />
+            </div>
+          </div>
+        </div>
+        <form class="form-content" @submit.prevent="handleSubmit">
+          <div class="text-center mb-4">
+            <img
+              :src="urlBucket + '/pre-form/slothmove-title-logo.png'"
+              width="230px"
+              height="40px"
+              class=""
+            />
+          </div>
+
+          <h3 class="fw-bold text-white text-center mb-4">
+            Update your address with everyone at the same time
+          </h3>
+
+          <div class="question">
+            <h6 class="fw-bold text-white">Email</h6>
+            <div class="d-flex">
+              <input
+                type="email"
+                placeholder="e.g Alexander@outlook.com"
+                class="email-input p-3 ps-4 w-100"
+                v-model="email"
+                required
+                style="font-family: 'Montserrat', sans-serif !important"
+              />
+            </div>
+            <p class="error-msg" v-show="errorEmail">* Enter a valid email address</p>
+          </div>
+
+          <div class="question confirm-email" v-show="showConfirmYourEmailInput">
+            <h6 class="fw-bold text-white">Confirm your Email</h6>
+            <div class="d-flex">
+              <input
+                type="email"
+                placeholder="e.g Alexander@outlook.com"
+                class="email-input p-3 ps-4 w-100"
+                v-model="confirmYourEmail"
+                required
+                style="font-family: 'Montserrat', sans-serif !important"
+              />
+            </div>
+            <p class="error-msg" v-show="errorConfirmYourEmail">
+              * The email addresses introduced don’t match
+            </p>
+          </div>
+
+          <!-- Address Finders -->
+          <div class="question" v-show="!manualInput">
+            <div class="d-flex align-items-end" style="margin-bottom: 8px">
+              <h6 class="fw-bold text-white mb-0">I'm moving from</h6>
+              <img
+                :src="urlBucket + '/pre-form/new-pin-red.png'"
+                class="ms-2"
+                width="13px"
+                height="21px"
+              />
+            </div>
+            <select id="choices" select-one>
+              <option value="" disabled selected hidden>Your previous postcode</option>
+            </select>
+            <p class="error-msg" v-show="errorFinderFrom">* This field is required</p>
+          </div>
+
+          <div class="question" v-show="!manualInput">
+            <div class="d-flex align-items-end" style="margin-bottom: 8px">
+              <h6 class="fw-bold text-white mb-0">I'm moving to</h6>
+              <img
+                :src="urlBucket + '/pre-form/new-pin-red.png'"
+                style="filter: hue-rotate(200deg)"
+                class="ms-2"
+                width="13px"
+                height="21px"
+              />
+            </div>
+            <select id="choices2" class="choices-custom" select-one>
+              <option value="" disabled selected hidden>Your new postcode</option>
+            </select>
+            <p class="error-msg" v-show="errorFinderTo">* This field is required</p>
+          </div>
+          <!-- Address Finders -->
+
+          <div v-show="manualInput">
+            <div class="question">
+              <h6 class="fw-bold text-white">Previous Postcode</h6>
+              <div class="d-flex">
+                <input
+                  type="text"
+                  placeholder="e.g WC2N 5DU"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveFromPostCode"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
+              </div>
+              <p class="error-msg" v-show="errorPostcodeFrom">* Invalid Postcode</p>
+            </div>
+
+            <div class="question">
+              <h6 class="fw-bold text-white">Previous Address</h6>
+              <div class="d-flex">
+                <input
+                  type="text"
+                  placeholder="e.g 9 Diamonf Avenue..."
+                  class="p-3 ps-4 w-100"
+                  v-model="moveFromAddress"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
+              </div>
+            </div>
+
+            <div class="question">
+              <h6 class="fw-bold text-white">New Postcode</h6>
+              <div class="d-flex">
+                <input
+                  type="text"
+                  placeholder="e.g WC2N 5DU"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveToPostCode"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
+              </div>
+              <p class="error-msg" v-show="errorPostcodeTo">* Invalid Postcode</p>
+            </div>
+
+            <div class="question">
+              <h6 class="fw-bold text-white">New Address</h6>
+              <div class="d-flex">
+                <input
+                  type="text"
+                  placeholder="e.g 33 Rosemary Road"
+                  class="p-3 ps-4 w-100"
+                  v-model="moveToAddress"
+                  :required="manualInput"
+                  style="font-family: 'Montserrat', sans-serif !important"
+                />
+              </div>
+            </div>
+          </div>
+
+          <p
+            class="text-white text-end text-decoration-underline mb-4"
+            style="cursor: pointer; font-size: 11.5px"
+            @click="toggleManualInput()"
+          >
+            {{ manualInput ? 'Use address finder' : 'Enter address manually' }}
+          </p>
+          <button class="submit mb-4" role="button">Update my address</button>
+
+          <div class="features row d-flex justify-content-center">
+            <div class="col px-1 text-center" style="color: white; max-width: 105px">
+              <img
+                :src="urlBucket +'/pre-form/shield.png'"
+                class="mb-1 img-fluid"
+                width="27px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
+              <h6 class="fw-bolder mb-1">SECURE</h6>
+              <p class="fw-bolder mb-0" style="font-size: 8px">SSL ENCRYPTION</p>
+            </div>
+            <div class="col px-1 text-center" style="color: white; max-width: 105px">
+              <img
+                :src="urlBucket +'/pre-form/shield-2.png'"
+                class="mb-1 img-fluid"
+                width="28px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
+              <h6 class="fw-bolder mb-1">ICO</h6>
+              <p class="fw-bolder mb-0" style="font-size: 8px">REF: ZA531326</p>
+            </div>
+            <div class="col px-1 text-center" style="color: white; max-width: 105px">
+              <img
+                :src="urlBucket +'/pre-form/lock.png'"
+                class="mb-1 img-fluid"
+                width="25px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
+              <h6 class="fw-bolder mb-1">GDPR</h6>
+              <p class="fw-bolder mb-0" style="font-size: 8px">COMPLIANT</p>
+            </div>
+            <div class="col px-1 text-center" style="color: white; max-width: 105px">
+              <img
+                :src="urlBucket + '/pre-form/bag.png'"
+                class="mb-1 img-fluid"
+                width="35px"
+                height="32.5px"
+                style="max-height: 32.5px"
+              />
+              <h6 class="fw-bolder mb-1">500+</h6>
+              <p class="fw-bolder mb-0" style="font-size: 8px">ORGANISATIONS</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <iframe
+    id="myIframe"
+    style="
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      z-index: 999999;
+      display: none;
+    "
+  ></iframe>
+
+  <!--Logic  -->
+  <script>
+    new Vue({
+      el: "#preform",
+      name: "Preform",
+      data() {
+        return {
+          urlBucket: "https://drmig4hxr8n3m.cloudfront.net",
+          search: "",
+          manualInput: false,
+          showConfirmYourEmailInput: false,
+          email: "",
+          confirmYourEmail: "",
+          moveFromPostCode: "",
+          moveFromAddress: "",
+          moveToPostCode: "",
+          moveToAddress: "",
+          completeAddressFrom: null,
+          completeAddressTo: null,
+          errorEmail: null,
+          errorConfirmYourEmail: null,
+          errorFinderFrom: null,
+          errorFinderTo: null,
+          errorPostcodeFrom: false,
+          errorPostcodeTo: false,
+          // features: [
+          //   {
+          //     title: "SECURE",
+          //     sub: "SSL ENCRYPTION",
+          //     icon: "/pre-form/shield.png",
+          //   },
+          //   {
+          //     title: "ICO",
+          //     sub: "REF: ZA531326",
+          //     icon: "/pre-form/shield-2.png",
+          //   },
+          //   {
+          //     title: "GDPR",
+          //     sub: "COMPLIANT",
+          //     icon: "/pre-form/lock.png",
+          //   },
+          //   {
+          //     title: "500+",
+          //     sub: "ORGANISATIONS",
+          //     icon: "/pre-form/bag.png",
+          //   },
+          // ],
+        };
+      },
+      methods: {
+        toggleManualInput: function () {
+          if (this.manualInput) {
+            this.moveFromPostCode = "";
+            this.moveToPostCode = "";
+            this.moveFromAddress = "";
+            this.moveToAddress = "";
+          }
+          this.manualInput = !this.manualInput;
+        },
+        regexEmail: function (email) {
+          const regexMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          return regexMail.test(email);
+        },
+        postcodeValid: function (postcode) {
+          let regex = /^[a-z]{1,2}\d[a-z\d]?\s*\d[a-z]{2}$/i;
+          return regex.test(postcode);
+        },
+
+        initChoiceSelector: function (id, postcodeType, moveType, completeAddress) {
+          let element = document.querySelector(id);
+
+          let choices = new Choices(element, {
+            choices: [],
+            removeItemButton: false,
+            searchEnabled: true,
+            searchChoices: true,
+            searchPlaceholderValue: "Search...",
+            allowHTML: true,
+            searchResultLimit: 100,
+            noChoicesText: "Sorry, no matching options",
+            itemSelectText: "",
+          });
+
+          const setPostcode = (postcode) => {
+            this[postcodeType] = postcode;
+          };
+
+          element.addEventListener("search", function (event) {
+            const search = event.detail.value;
+
+            if (search.length > 4) {
+              fetch(`https://www.slothmover.co.uk:8443/addresses/postcodeLookup?stream=${search}`, {
+                method: "GET",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              })
+                .then((res) => res.json())
+                .then((json) => {
+                  console.log(json);
+
+                  setPostcode(json.postcode);
+
+                  let addresses = json.addresses.map((item) => {
+                    item.postcode = json.postcode;
+                    item.latitude = json["latitude"];
+                    item.longitude = json["longitude"];
+
+                    return { value: item, label: item.formatted_address.join(" ") };
+                  });
+                  //   console.log(addresses);
+
+                  choices.clearChoices();
+                  choices.setChoices(addresses);
+                })
+                .catch((e) => console.error(e));
+            }
+          });
+
+          element.addEventListener("choice", (event) => {
+            console.log(event.detail.choice);
+            this[moveType] = event.detail.choice["label"];
+            this[completeAddress] = event.detail.choice["value"];
+          });
+
+          element.addEventListener("removeItem", (event) => {
+            // console.log(event);
+
+            if (
+              event.detail["label"] == this.moveFromAddress ||
+              event.detail["label"] == this.moveToAddress
+            ) {
+              this[moveType] = "";
+            }
+          });
+        },
+        validatingInputs: function () {
+          if (this.regexEmail(this.email)) {
+            this.errorEmail = false;
+          } else {
+            this.errorEmail = true;
+          }
+
+          if (this.email == this.confirmYourEmail) {
+            this.errorConfirmYourEmail = false;
+          } else {
+            this.errorConfirmYourEmail = true;
+          }
+
+          if (this.moveFromAddress.length > 0) {
+            this.errorFinderFrom = false;
+          } else {
+            this.errorFinderFrom = true;
+          }
+
+          if (this.postcodeValid(this.moveFromPostCode)) {
+            this.errorPostcodeFrom = false;
+          } else {
+            this.errorPostcodeFrom = true;
+          }
+
+          if (this.postcodeValid(this.moveToPostCode)) {
+            this.errorPostcodeTo = false;
+          } else {
+            this.errorPostcodeTo = true;
+          }
+
+          if (this.moveToAddress.length > 0) {
+            this.errorFinderTo = false;
+          } else {
+            this.errorFinderTo = true;
+          }
+        },
+        handleSubmit: function (event) {
+          event.preventDefault();
+
+          this.validatingInputs();
+
+          if (this.errorEmail == false && this.confirmYourEmail == this.email) {
+            let dataDebug = {
+              email: this.email,
+              moveFromPostCode: this.moveFromPostCode,
+              moveFromAddress: this.moveFromAddress,
+              moveToPostCode: this.moveToPostCode,
+              moveToAddress: this.moveToAddress,
+              completeAddressFrom: this.completeAddressFrom,
+              completeAddressTo: this.completeAddressTo,
+            };
+
+            if (!this.manualInput && this.errorFinderFrom == false && this.errorFinderTo == false) {
+              let obj = {};
+
+              obj["email"] = this.email;
+              obj["moveFromAddress"] = this.moveFromAddress;
+              obj["moveToAddress"] = this.moveToAddress;
+
+              obj["completeAddressFrom"] = this.completeAddressFrom;
+              obj["completeAddressTo"] = this.completeAddressTo;
+
+              const objEncode64 = window.btoa(JSON.stringify(obj));
+
+              console.log(dataDebug);
+
+              // console.log(obj);
+              // return
+              // Redirection to Form
+
+              // console.log(`?completePre=${objEncode64}&color=tiktok&logo=tiktok`);
+              // location.href = `https://form.slothmove.com/?completePre=${objEncode64}&color=tiktok&logo=tiktok`;
+
+              this.displayMainFormIframe(`?completePre=${objEncode64}`);
+            }
+
+            if (
+              this.manualInput &&
+              this.errorPostcodeFrom == false &&
+              this.errorPostcodeTo == false
+            ) {
+              console.log(dataDebug);
+              // Redirection to Form
+              // document.location.href =
+              //   "https://form.slothmove.com/?smfNewPostcode=" +
+              //   this.moveToPostCode +
+              //   "&smfPrevPostcode=" +
+              //   this.moveFromPostCode +
+              //   "&smfNewAddress=" +
+              //   this.moveToAddress +
+              //   "&smfPrevAddress=" +
+              //   this.moveFromAddress +
+              //   "&smfEmail=" +
+              //   this.email;
+
+              this.displayMainFormIframe(
+                `?smfNewPostcode=${this.moveToPostCode}&smfPrevPostcode=${this.moveFromPostCode}&smfNewAddress=${this.moveToAddress}&smfPrevAddress=${this.moveFromAddress}&smfEmail=${this.email}`
+              );
+            }
+          }
+        },
+        displayMainFormIframe(params) {
+          var iframe = document.getElementById("myIframe");
+          iframe.src = `https://form.slothmove.com/${params}`;
+          iframe.style.display = "block";
+
+          setTimeout(() => {
+            //Iframe Loaded
+
+            window.onmessage = function (e) {
+              if (typeof e.data === "string" && JSON.parse(e.data).stripe) {
+                top.window.location.href = JSON.parse(e.data).stripe;
+                return;
+              }
+              return;
+            };
+          }, 1000);
+        },
+      },
+      mounted() {
+        this.initChoiceSelector(
+          "#choices",
+          "moveFromPostCode",
+          "moveFromAddress",
+          "completeAddressFrom"
+        );
+        this.initChoiceSelector(
+          "#choices2",
+          "moveToPostCode",
+          "moveToAddress",
+          "completeAddressTo"
+        );
+
+        const adjustSizeDetail = () => {
+          let resizeObserver = new ResizeObserver((entries) => {
+            var container = document.querySelector(".gradient");
+            var content = document.querySelector(".form-content");
+
+            container.style.height = content.offsetHeight + 12 + "px";
+          });
+
+          let div = document.querySelector(".form-content");
+
+          resizeObserver.observe(div);
+        };
+        adjustSizeDetail();
+      },
+      watch: {
+        email(value) {
+          if (this.regexEmail(value)) {
+            this.showConfirmYourEmailInput = true;
+          } else {
+            this.showConfirmYourEmailInput = false;
+          }
+        },
+      },
+    });
+  </script>
+  <!--Logic  -->
+
+  <style>
+    .main {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    #preform {
+      font-family: "Montserrat", sans-serif !important;
+    }
+
+    #preform input::placeholder {
+      font-family: "Montserrat", sans-serif !important;
+    }
+
+    .widget select,
+    .wp-block-search.wp-block-search__button-inside .wp-block-search__inside-wrapper,
+    form input:read-write,
+    form select,
+    form select option,
+    form textarea,
+    form.wp-block-search input.wp-block-search__input {
+      font-family: "Montserrat", sans-serif !important;
+    }
+
+    #preform .text-white {
+      color: #e1dcdc !important;
+    }
+
+    #preform .form-content {
+      background-color: #1b1d29;
+      border-radius: 30px;
+      padding: 30px;
+      max-width: 510px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 97%;
+      min-height: 160px;
+    }
+
+    .gradient {
+      position: relative;
+      max-width: 520px;
+      height: 440px;
+      border-radius: 30px;
+      background: linear-gradient(270deg, #ffe859, #23a9d7, #1f476f, #ff7f11, #ec0677);
+      background-size: 1000% 1000%;
+      -webkit-animation: gradient 30s ease infinite;
+      -moz-animation: gradient 30s ease infinite;
+      animation: gradient 30s ease infinite;
+    }
+
+    @-webkit-keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @-moz-keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    #preform .container-sloth {
+      position: absolute;
+      left: -250px;
+      top: 12px;
+      display: flex;
+      justify-content: center;
+      z-index: 1;
+    }
+
+    /*Media Query*/
+    @media screen and (min-width: 50px) and (max-width: 622px) {
+      .main {
+        padding-top: 7rem;
+      }
+
+      #preform .form-content {
+        padding-top: 50px;
+        padding-left: 17px;
+        padding-right: 17px;
+      }
+
+      #preform .container-sloth {
+        left: 5px;
+        top: -105px;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    #preform .confirm-email {
+      animation: fadeIn 1s;
+    }
+
+    #preform input {
+      outline: none;
+      border-radius: 0.375rem;
+      border: none;
+      margin-bottom: 5px;
+    }
+
+    #preform .question {
+      margin-bottom: 23.5px;
+    }
+
+    #preform .error-msg {
+      color: rgb(198, 74, 69);
+      font-size: 12px;
+    }
+
+    #preform .choices {
+      margin-bottom: 5px;
+    }
+
+    #preform .choices__list--dropdown {
+      top: 0% !important;
+    }
+
+    #preform .is-flipped .choices__list--dropdown {
+      bottom: 0% !important;
+      top: auto !important;
+    }
+
+    #preform .choices,
+    #preform .choices__list,
+    #preform .choices__inner {
+      border-radius: 0.375rem !important;
+    }
+
+    #preform .choices__inner {
+      min-height: 55px !important;
+      padding-left: 18px;
+    }
+
+    #preform .choices__item,
+    #preform .choices__input {
+      font-size: 16px !important;
+      padding-left: 20px;
+      padding-right: 3px;
+      z-index: 2;
+    }
+
+    #preform .choices__list--single {
+      padding: 7px 16px 4px 4px !important;
+    }
+
+    #preform .choices__list--single .choices__item--selectable {
+      padding-left: 1px;
+    }
+
+    #preform div[data-deletable] {
+      padding-left: 0px;
+    }
+
+    #preform .submit {
+      appearance: button;
+      background-color: #c13737;
+      border: solid transparent;
+      border-radius: 0.45rem;
+      border-width: 0 0 4px;
+      box-sizing: border-box;
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      line-height: 20px;
+      margin: 0;
+      outline: none;
+      overflow: visible;
+      padding: 17px 16px;
+      text-align: center;
+      touch-action: manipulation;
+      transform: translateZ(0);
+      transition: filter 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
+      vertical-align: middle;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    #preform .submit:after {
+      background-clip: padding-box;
+      background-color: #ff5a5a;
+      border: solid transparent;
+      border-radius: 0.375rem;
+      border-width: 0 0 3px;
+      bottom: -1px;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    #preform .submit:main,
+    #preform .submit:focus {
+      user-select: auto;
+    }
+
+    #preform .submit:hover:not(:disabled) {
+      filter: brightness(1.1);
+      -webkit-filter: brightness(1.1);
+    }
+
+    #preform .submit:disabled {
+      cursor: auto;
+    }
+
+    #preform .submit:active {
+      border-width: 4px 0 0;
+      background: none;
+    }
+  </style>
+</div>
